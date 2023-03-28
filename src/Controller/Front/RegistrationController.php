@@ -52,11 +52,17 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
+
+            $this->addFlash('success', 'Your account has been created. Please check your email to confirm your email address.');
+            
+            return $this->redirectToRoute('front_app_login');
+            /*
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
+            */
         }
 
         return $this->render('front/registration/register.html.twig', [
@@ -65,13 +71,23 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $id = $request->get('id'); // retrieve the user id from the url
+        
+        // Verify the user id exists and is not null
+        if (null === $id) {
+            return $this->redirectToRoute('front_app_default');
+        }
+        
+        $user = $userRepository->find($id);
+        if (null === $user) {
+            return $this->redirectToRoute('front_app_default');
+        }
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
