@@ -73,6 +73,7 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
+    
         $id = $request->get('id'); // retrieve the user id from the url
         
         // Verify the user id exists and is not null
