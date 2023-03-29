@@ -1,5 +1,5 @@
 {% extends 'front_base.html.twig' %}
-{% block title %}TEAM NEW!{% endblock %}
+{% block title %}TEAM EDIT!{% endblock %}
 
 {% block body %}
 <style>
@@ -8,11 +8,12 @@
 </style>
 
 <div class="example-wrapper">
-{{ form_start(form) }}
-    {{form_widget(form)}}
+   {{form_start(updateEmployeeForm)}}
+   {{form_widget(updateEmployeeForm)}}
+   {{form_rest(updateEmployeeForm)}}
     <div class="flex gap-5">
         <button class="mt-6 px-4 py-2 w-64 rounded-md text-center bg-emerald-600 text-white hover:bg-emerald-700">{{ button_label|default('save') | trans }}</button>
     </div>
-{{ form_end(form) }}
+   {{form_end(updateEmployeeForm)}}
 </div>
 {% endblock %}
