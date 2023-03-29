@@ -60,6 +60,7 @@ class HkVideoController extends AbstractController
             return $this->redirectToRoute('app_hk_video_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        #test
         return $this->renderForm('front/hk_video/edit.html.twig', [
             'hk_video' => $hkVideo,
             'form' => $form,
