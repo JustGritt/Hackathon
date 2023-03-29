@@ -14,7 +14,7 @@
         {{category.isActive}}
 
         {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
-            <a href="/">edit</a>
+            <a href="{{ path('front_app_category_enable', {'id': category.id}) }}" class="text-indigo-600 hover:text-indigo-900">Activer la categorie</a>
         {% endif %}
     </div>
 
