@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -43,6 +45,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {
@@ -165,5 +171,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         $this->authCode = $authCode;
     }
+
 
 }
