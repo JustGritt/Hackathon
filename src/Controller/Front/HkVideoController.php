@@ -47,7 +47,7 @@ class HkVideoController extends AbstractController
             'hk_video' => $hkVideo,
         ]);
     }
-
+    #route edit
     #[Route('/{id}/edit', name: 'app_hk_video_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, HkVideo $hkVideo, HkVideoRepository $hkVideoRepository): Response
     {
