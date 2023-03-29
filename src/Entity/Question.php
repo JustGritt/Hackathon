@@ -16,6 +16,12 @@ class Question
     #[ORM\Column(length: 150)]
     private ?string $content = null;
 
+    #[ORM\Column(length:255)]
+    private ?string $image;
+
+    #[Vich\UploadableField(mapping:"quiz", fileNameProperty:"image")]
+    private \DateTime $imageFile;
+
     #[ORM\Column]
     private bool $is_response = false;
 
@@ -46,5 +52,20 @@ class Question
         $this->is_response = $is_response;
 
         return $this;
+    }
+
+    public function getImageFile(): \DateTime
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
     }
 }

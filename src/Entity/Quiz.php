@@ -6,6 +6,7 @@ use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
 class Quiz
@@ -18,6 +19,13 @@ class Quiz
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+
+    #[ORM\Column(length:255)]
+    private ?string $image;
+
+    #[Vich\UploadableField(mapping:"quiz", fileNameProperty:"image")]
+    private \DateTime $imageFile;
+
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: QuestionHasQuiz::class)]
     private Collection $questionHasQuizzes;
 
@@ -28,6 +36,24 @@ class Quiz
     #[ORM\OneToOne(inversedBy: 'quiz', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $createdBy = null;
+
+    #[ORM\Column]
+    private ?bool $is_active = null;
+
+    #[ORM\Column]
+    private ?bool $is_draft = null;
+
+    #[ORM\Column]
+    private ?bool $is_published = null;
+
+    #[ORM\Column]
+    private ?bool $is_waiting = null;
+
+    #[ORM\Column]
+    private ?bool $is_refused = null;
+
+    #[ORM\OneToOne(mappedBy: 'quiz', cascade: ['persist', 'remove'])]
+    private ?CommentsQuiz $commentsQuiz = null;
 
     public function __construct()
     {
@@ -101,6 +127,116 @@ class Quiz
     public function setCreatedBy(User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(bool $is_active): self
+    {
+        $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function isIsDraft(): ?bool
+    {
+        return $this->is_draft;
+    }
+
+    public function setIsDraft(bool $is_draft): self
+    {
+        $this->is_draft = $is_draft;
+
+        return $this;
+    }
+
+    public function isIsPublished(): ?bool
+    {
+        return $this->is_published;
+    }
+
+    public function setIsPublished(bool $is_published): self
+    {
+        $this->is_published = $is_published;
+
+        return $this;
+    }
+
+    public function isIsWaiting(): ?bool
+    {
+        return $this->is_waiting;
+    }
+
+    public function setIsWaiting(bool $is_waiting): self
+    {
+        $this->is_waiting = $is_waiting;
+
+        return $this;
+    }
+
+    public function isIsRefused(): ?bool
+    {
+        return $this->is_refused;
+    }
+
+    public function setIsRefused(bool $is_refused): self
+    {
+        $this->is_refused = $is_refused;
+
+        return $this;
+    }
+
+    public function setImageFile(File $image = null): void
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile(): \DateTime
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function getCommentsQuiz(): ?CommentsQuiz
+    {
+        return $this->commentsQuiz;
+    }
+
+    public function setCommentsQuiz(?CommentsQuiz $commentsQuiz): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($commentsQuiz === null && $this->commentsQuiz !== null) {
+            $this->commentsQuiz->setQuiz(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($commentsQuiz !== null && $commentsQuiz->getQuiz() !== $this) {
+            $commentsQuiz->setQuiz($this);
+        }
+
+        $this->commentsQuiz = $commentsQuiz;
 
         return $this;
     }
