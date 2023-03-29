@@ -13,7 +13,11 @@
             <p>Name: {{item.name}} </p>
             <p>minAge: {{item.minAge}} </p>
             <p>maxAge: {{item.maxAge}} </p>
-            <p>isActive: {{item.isActive}} </p>
+            <p>isActive: {{item.isActive == true ? "Activer" : "Non-active" }} </p>
+            <a href="{{ path('front_app_category_show', {'id': item.id}) }}" class="text-indigo-600 hover:text-indigo-900">Show the category</a>
+            <a href="{{ path('front_app_category_edit', {'id': item.id}) }}" class="text-indigo-600 hover:text-indigo-900">Edit the category</a>
+
+
         </div>
     {% endfor %}
 </div>

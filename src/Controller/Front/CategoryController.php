@@ -27,19 +27,12 @@ class CategoryController extends AbstractController
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(CategoryUpdateType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $result = $categoryRepository->findOneBy([
-            //     'name' => $form->get('name')->getData()
-            // ]);
-
-            // if($result !== null) {
-            //     return $this->redirectToRoute('front_app_category');
-            // }
-
+            $category->setIsActive(false);
             $category->setOwner($this->getUser());
             $categoryRepository->save($category, true);
 
@@ -87,11 +80,12 @@ class CategoryController extends AbstractController
 
     #[Route('/category/enable/{id}', name: 'app_category_enable')]
     #[Security("is_granted('ROLE_ADMIN')")]
-    public function enable(Category $category): Response
+    public function enable(Category $category, Request $request, CategoryRepository $categoryRepository): Response
     {
-        return $this->renderForm('front/category/show.html.twig', [
-            'category' => $category,
+        $category->setIsActive(true);
+        $categoryRepository->save($category, true);
+        $this->addFlash('success', 'Catégorie activée');
 
-        ]);
+        return $this->redirectToRoute('front_app_category', [], Response::HTTP_SEE_OTHER);
     }
 }
