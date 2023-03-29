@@ -49,6 +49,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
     private Collection $categories;
 
+    #[ORM\OneToOne(mappedBy: 'createdBy', cascade: ['persist', 'remove'])]
+    private ?Quiz $quiz = null;
+
+    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
+    private ?QuizMade $quizMade = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -203,6 +209,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
                 $category->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQuiz(): ?Quiz
+    {
+        return $this->quiz;
+    }
+
+    public function setQuiz(Quiz $quiz): self
+    {
+        // set the owning side of the relation if necessary
+        if ($quiz->getCreatedBy() !== $this) {
+            $quiz->setCreatedBy($this);
+        }
+
+        $this->quiz = $quiz;
+
+        return $this;
+    }
+
+    public function getQuizMade(): ?QuizMade
+    {
+        return $this->quizMade;
+    }
+
+    public function setQuizMade(QuizMade $quizMade): self
+    {
+        // set the owning side of the relation if necessary
+        if ($quizMade->getUserId() !== $this) {
+            $quizMade->setUserId($this);
+        }
+
+        $this->quizMade = $quizMade;
 
         return $this;
     }

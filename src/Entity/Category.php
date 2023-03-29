@@ -29,6 +29,9 @@ class Category
     #[ORM\Column(nullable: true)]
     private ?int $maxAge = null;
 
+    #[ORM\OneToOne(mappedBy: 'category', cascade: ['persist', 'remove'])]
+    private ?Quiz $quiz = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,23 @@ class Category
     public function setMaxAge(?int $maxAge): self
     {
         $this->maxAge = $maxAge;
+
+        return $this;
+    }
+
+    public function getQuiz(): ?Quiz
+    {
+        return $this->quiz;
+    }
+
+    public function setQuiz(Quiz $quiz): self
+    {
+        // set the owning side of the relation if necessary
+        if ($quiz->getCategory() !== $this) {
+            $quiz->setCategory($this);
+        }
+
+        $this->quiz = $quiz;
 
         return $this;
     }

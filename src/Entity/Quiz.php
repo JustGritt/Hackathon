@@ -18,12 +18,16 @@ class Quiz
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'quizzes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
-
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: QuestionHasQuiz::class)]
     private Collection $questionHasQuizzes;
+
+    #[ORM\OneToOne(inversedBy: 'quiz', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    #[ORM\OneToOne(inversedBy: 'quiz', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $createdBy = null;
 
     public function __construct()
     {
@@ -47,17 +51,6 @@ class Quiz
         return $this;
     }
 
-    public function getUserId(): ?User
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?User $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, QuestionHasQuiz>
@@ -73,7 +66,6 @@ class Quiz
             $this->questionHasQuizzes->add($questionHasQuiz);
             $questionHasQuiz->setQuiz($this);
         }
-
         return $this;
     }
 
@@ -85,6 +77,30 @@ class Quiz
                 $questionHasQuiz->setQuiz(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
