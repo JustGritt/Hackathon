@@ -9,9 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-    {{category.name}}
-    {{category.minAge}}
-    {{category.maxAge}}
-    {{category.isActive}}
+    <div class="product">
+        {{category.name}}
+        {{category.minAge}}
+        {{category.maxAge}}
+        {{category.isActive}}
+
+        {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
+            <a href="/">edit</a>
+        {% endif %}
+    </div>
+
 </div>
 {% endblock %}

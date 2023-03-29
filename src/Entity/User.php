@@ -49,6 +49,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
     private Collection $categories;
 
+    #[ORM\Column(length: 65)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 128)]
+    private ?string $lastname = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -202,6 +208,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
                 $category->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }
