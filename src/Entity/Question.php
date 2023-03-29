@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
@@ -14,6 +15,12 @@ class Question
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Your question should be at least {{ limit }} characters",
+        max: 150,
+    )]
     private ?string $content = null;
 
     #[ORM\Column]
