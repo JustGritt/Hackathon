@@ -14,6 +14,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            # configure the maximum login attempts
+            login_throttling:
+                max_attempts: 5          # per minute ...
+                # interval: '15 minutes' # ... or in a custom period
             lazy: true
             provider: app_user_provider
             user_checker: App\Security\UserChecker
