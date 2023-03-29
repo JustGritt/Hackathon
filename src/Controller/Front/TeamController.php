@@ -27,13 +27,12 @@ class TeamController extends AbstractController
     public function editOne(User $user, UserRepository $userRepository, Request $request): Response
     {
        
-        $this->addFlash('success', 'Employee updated!');
         $form = $this->createForm(UpdateUserFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
-            //$this->addFlash('success', 'Employee updated!');
+            $this->addFlash('success', 'Employee updated!');
             return $this->redirectToRoute('front_app_team');
         }
 
