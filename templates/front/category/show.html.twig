@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-
-<title>Hello CategoryController!</title>
-
+{% extends 'front_base.html.twig' %}
+{% block title %}TEAM SHOW!{% endblock %}
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -9,9 +7,16 @@
 </style>
 
 <div class="example-wrapper">
-    {{category.name}}
-    {{category.minAge}}
-    {{category.maxAge}}
-    {{category.isActive}}
+    <div class="product">
+        {{category.name}}
+        {{category.minAge}}
+        {{category.maxAge}}
+        {{category.isActive}}
+
+        {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
+            <a href="/">edit</a>
+        {% endif %}
+    </div>
+
 </div>
 {% endblock %}

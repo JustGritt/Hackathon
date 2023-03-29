@@ -55,8 +55,6 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}', name: 'app_category_show')]
     public function show(Category $category): Response
     {
-
-
         return $this->render('front/category/show.html.twig', [
             'category' => $category,
         ]);
@@ -74,6 +72,7 @@ class CategoryController extends AbstractController
                 // $this->addFlash('error', 'Cette catégorie existe déjà');
                 return $this->redirectToRoute('front_app_category', [], Response::HTTP_SEE_OTHER);
             }
+
             $category->setIsActive(false);
             $categoryRepository->save($category, true);
 
@@ -83,6 +82,16 @@ class CategoryController extends AbstractController
         return $this->renderForm('front/category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/category/enable/{id}', name: 'app_category_enable')]
+    #[Security("is_granted('ROLE_ADMIN')")]
+    public function enable(Category $category): Response
+    {
+        return $this->renderForm('front/category/show.html.twig', [
+            'category' => $category,
+
         ]);
     }
 }
