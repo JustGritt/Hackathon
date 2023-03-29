@@ -69,7 +69,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             if($categoryRepository->findBy(['name' => $category->getName()])){
-                // $this->addFlash('error', 'Cette catégorie existe déjà');
+                $this->addFlash('error', 'Cette catégorie existe déjà');
                 return $this->redirectToRoute('front_app_category', [], Response::HTTP_SEE_OTHER);
             }
 
