@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -17,6 +19,12 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 65)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Your category name should be at least {{ limit }} characters",
+        max: 65,
+    )]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -26,9 +34,13 @@ class Category
     private ?User $owner = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\LessThan(propertyPath: 'maxAge', message: 'The min age must be less than the max age')]
+    #[Assert\GreaterThan(value: 0, message: 'The min age must be greater than 0')]
     private ?int $minAge = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\GreaterThan(propertyPath: 'minAge', message: 'The max age must be greater than the min age')]
+    #[Assert\LessThan(value: 100, message: 'The max age must be less than 100')]
     private ?int $maxAge = null;
 
     #[ORM\OneToOne(mappedBy: 'category')]

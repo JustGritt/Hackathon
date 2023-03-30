@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Repository\UserRepository;
 use App\Form\UpdateUserFormType;
 use App\Entity\User;
@@ -21,12 +22,10 @@ class TeamController extends AbstractController
         ]);
     }
 
-
     #[Route('/team/{id}/edit', name: 'app_team_edit')]
     #[Security("is_granted('ROLE_ADMIN')")]
     public function editOne(User $user, UserRepository $userRepository, Request $request): Response
     {
-       
         $form = $this->createForm(UpdateUserFormType::class, $user);
         $form->handleRequest($request);
 
@@ -39,8 +38,9 @@ class TeamController extends AbstractController
         return $this->renderForm('front/team/show.html.twig', [
             'updateEmployeeForm' => $form
         ]);
-        
     }
+
     
+
 
 }

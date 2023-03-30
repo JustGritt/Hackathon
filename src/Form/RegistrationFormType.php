@@ -20,6 +20,11 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
+            // ->add('bithdate') // from 1900 to 2023
+            ->add('bithdate', null, [
+                'years' => range(date('Y') - 100, date('Y')),
+                'label' => 'Birthdate',
+            ])
             ->add('email')
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,

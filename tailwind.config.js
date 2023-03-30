@@ -7,9 +7,9 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
 	theme: {
     fontFamily: {
-        'bungee-inline': ['Bungee Inline', 'cursive'],
-        'bungee-shade': ['Bungee Shade', 'cursive'],
-        'lato': ['Lato', 'sans-serif']
+        'sans': ['Source Sans Pro', 'sans-serif'],
+        'mono': ['Prompt', 'sans-serif'],
+        'lato': ['Lato', 'sans-serif'],
     },
     extend: {
       colors: {
