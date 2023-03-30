@@ -24,6 +24,8 @@ class AppFixtures extends Fixture
         $user->setFirstname('admin');
         $user->setLastname('admin');
         $user->setEmail('admin@admin.fr');
+        $user->setBithdate(new \DateTime('06/04/2014'));
+
         $user->setIsVerified(true);
         $user->setRoles(['ROLE_ADMIN']);
 
@@ -38,6 +40,7 @@ class AppFixtures extends Fixture
         $modo->setLastname('modo');
         $modo->setEmail('modo@modo.fr');
         $modo->setIsVerified(true);
+        $modo->setBithdate(new \DateTime('06/04/2014'));
         $modo->setRoles(['ROLE_ADMIN']);
 
         $password = $this->hasher->hashPassword($modo, 'esgi1234');
