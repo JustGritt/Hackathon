@@ -56,6 +56,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: CommentaireVideo::class, orphanRemoval: false)]
+    private Collection $Commentaire_id;
+
+    #[ORM\ManyToMany(targetEntity: HkStat::class, mappedBy: 'user_id')]
+    private Collection $stats_id;
+
+    public function __construct()
+    {
+        $this->Commentaire_id = new ArrayCollection();
+        $this->stats_id = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+    }
+        
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
     private Collection $categories;
 
@@ -85,11 +98,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $bithdate = null;
-
-    public function __construct()
-    {
-        $this->categories = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -185,7 +193,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
         return $this;
     }
 
@@ -213,6 +220,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         $this->authCode = $authCode;
     }
 
+    /**
+     * @return Collection<int, CommentaireVideo>
+     */
+    public function getCommentaireId(): Collection
+    {
+        return $this->Commentaire_id;
+    }
+
+    public function addCommentaireId(CommentaireVideo $videoId): self
+    {
+        if (!$this->Commentaire_id->contains($videoId)) {
+            $this->Commentaire_id->add($videoId);
+            $videoId->setUserId($this);
+        }
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Category>
@@ -232,6 +256,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
+    public function removeVideoId(CommentaireVideo $videoId): self
+    {
+        if ($this->Commentaire_id->removeElement($videoId)) {
+            // set the owning side to null (unless already changed)
+            if ($videoId->getUserId() === $this) {
+                $videoId->setUserId(null);
+            }
+        }
+        return $this;
+    }
+
     public function removeCategory(Category $category): self
     {
         if ($this->categories->removeElement($category)) {
@@ -239,6 +274,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             if ($category->getOwner() === $this) {
                 $category->setOwner(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HkStat>
+     */
+    public function getStatId(): Collection
+    {
+        return $this->stats_id;
+    }
+
+    public function addStatId(HkStat $stats_id): self
+    {
+        if (!$this->stats_id->contains( $stats_id)) {
+            $this->stats_id->add($stats_id);
+            $stats_id->addUserId($this);
         }
 
         return $this;
@@ -303,7 +356,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setBithdate(\DateTimeInterface $bithdate): self
     {
         $this->bithdate = $bithdate;
-
         return $this;
     }
 
