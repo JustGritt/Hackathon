@@ -258,6 +258,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         $this->quiz = $quiz;
     }
+    
     public function getFirstname(): ?string
     {
         return $this->firstname;
