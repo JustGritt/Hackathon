@@ -3,7 +3,7 @@
 <title>HkVideo index</title>
 
 {% block body %}
-    <h1>HkVideo index</h1>
+    <h1>HkVideo </h1>
 
     <table class="table">
         <thead>
@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Link</th>
                 <th>Active</th>
+                <th>description</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,9 +21,12 @@
                 <td>{{ hk_video.id }}</td>
                 <td>{{ hk_video.link }}</td>
                 <td>{{ hk_video.active }}</td>
+                <td>{{ hk_video.description }}</td>
                 <td>
                     <a href="{{ path('front_app_hk_video_show', {'id': hk_video.id}) }}">show</a>
                     <a href="{{ path('front_app_hk_video_edit', {'id': hk_video.id}) }}">edit</a>
+                    <a href="{{ path('front_app_hk_video_valider', {'id': hk_video.id}) }}">valider</a>
+                    <a href="{{ path('front_app_hk_video_refused', {'id': hk_video.id}) }}">refuser</a>
                 </td>
             </tr>
         {% else %}

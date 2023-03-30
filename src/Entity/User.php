@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -43,6 +45,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: CommentaireVideo::class, orphanRemoval: false)]
+    private Collection $Commentaire_id;
+
+    public function __construct()
+    {
+        $this->Commentaire_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,7 +148,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
         return $this;
     }
 
@@ -164,6 +173,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
+    }
+
+    /**
+     * @return Collection<int, CommentaireVideo>
+     */
+    public function getCommentaireId(): Collection
+    {
+        return $this->Commentaire_id;
+    }
+
+    public function addCommentaireId(CommentaireVideo $videoId): self
+    {
+        if (!$this->Commentaire_id->contains($videoId)) {
+            $this->Commentaire_id->add($videoId);
+            $videoId->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideoId(CommentaireVideo $videoId): self
+    {
+        if ($this->Commentaire_id->removeElement($videoId)) {
+            // set the owning side to null (unless already changed)
+            if ($videoId->getUserId() === $this) {
+                $videoId->setUserId(null);
+            }
+        }
+
+        return $this;
     }
 
 }

@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\CommentaireVideo;
+use App\Form\CommentaireVideoType;
+use App\Repository\CommentaireVideoRepository;
+
 #[Route('/hk/video')]
 class HkVideoController extends AbstractController
 {
@@ -41,13 +45,57 @@ class HkVideoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_hk_video_show', methods: ['GET'])]
-    public function show(HkVideo $hkVideo): Response
-    {
+    public function show(HkVideo $hkVideo,CommentaireVideoRepository $commentaireVideoRepository): Response
+    {   
+        $comments =  $commentaireVideoRepository->findBy(array('video_id' => $hkVideo ->getId()));
         return $this->render('front/hk_video/show.html.twig', [
             'hk_video' => $hkVideo,
+            'comments' => $comments
         ]);
     }
-    #route edit
+
+    #app_hk_video_valider
+    #[Route('/{id}/valider', name: 'app_hk_video_valider', methods: ['GET', 'POST'])]
+    public function valider(Request $request, HkVideo $hkVideo, HkVideoRepository $hkVideoRepository): Response
+    {
+        $hkVideo = $hkVideo->setActive(true);
+        $hkVideo = $hkVideo->setRefused(false);
+        $hkVideoRepository->save($hkVideo, true);
+
+        return $this->redirectToRoute('front_app_hk_video_index', [], Response::HTTP_SEE_OTHER);
+
+    }
+
+    #app_hk_video_refused
+    #[Route('/{id}/refused', name: 'app_hk_video_refused', methods: ['GET', 'POST'])]
+    public function refused(Request $request, HkVideo $hkVideo, HkVideoRepository $hkVideoRepository,CommentaireVideoRepository $commentaireVideoRepositoryHkVideo): Response
+    {
+        $hkVideo = $hkVideo->setActive(false);
+        $hkVideo = $hkVideo->setRefused(true);
+        $hkVideoRepository->save($hkVideo, true);
+
+        
+        $commentaireVideo = new CommentaireVideo();
+        $form = $this->createForm(CommentaireVideoType::class, $commentaireVideo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentaireVideo->setUserId($this->getUser());
+            $commentaireVideo->setVideoId($hkVideo);
+            $commentaireVideoRepositoryHkVideo->save($commentaireVideo, true);
+
+            return $this->redirectToRoute('front_app_hk_video_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('front/commentaire_video/new.html.twig', [
+            'commentaire_video' => $commentaireVideo,
+            'video' =>  $hkVideo,
+            'form' => $form
+        ]);
+    }
+
+    
+
     #[Route('/{id}/edit', name: 'app_hk_video_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, HkVideo $hkVideo, HkVideoRepository $hkVideoRepository): Response
     {
@@ -57,10 +105,9 @@ class HkVideoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hkVideoRepository->save($hkVideo, true);
 
-            return $this->redirectToRoute('app_hk_video_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_hk_video_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        #test
         return $this->renderForm('front/hk_video/edit.html.twig', [
             'hk_video' => $hkVideo,
             'form' => $form,
@@ -74,6 +121,6 @@ class HkVideoController extends AbstractController
             $hkVideoRepository->remove($hkVideo, true);
         }
 
-        return $this->redirectToRoute('app_hk_video_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('front_app_hk_video_index', [], Response::HTTP_SEE_OTHER);
     }
 }

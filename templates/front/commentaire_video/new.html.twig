@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<title>New CommentaireVideo</title>
+
+
+{% block body %}
+
+    <h1>Create new CommentaireVideo</h1>
+
+    <p>{{ video.id }}</p>
+    <p>{{ video.description }}</p>
+    <p>{{ video.link }}</p>
+
+    {{ include('front/commentaire_video/_form.html.twig') }}
+
+    <a href="{{ path('front_app_hk_video_index') }}">back to list</a>
+{% endblock %}
