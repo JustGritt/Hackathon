@@ -107,19 +107,18 @@
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col dark:bg-gray-800">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5 dark:bg-gray-800">
-            <div class="flex flex-shrink-0 items-center px-4">
-                <img class="pl-4 h-16 w-auto" src="/img/Logo.svg" alt="PixelFusion">
-
+            <div class="flex flex-shrink-0 items-center justify-center px-4">
+                <img class="h-10 w-auto" src="{{ asset("assets/icons/jaji.svg") }}" alt="PixelFusion">
             </div>
-            <div class="mt-1 flex flex-grow flex-col">
-                <nav class="flex-1 space-y-1 px-12 pb-4 dark:bg-gray-800">
+            <div class="my-6 flex flex-grow flex-col items-start">
+                <nav class="flex-1 space-y-1 pl-3 pb-4 dark:bg-gray-800">
                     <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
                     <ul class="flex flex-col gap-y-6 ">
                         <li>
                             <a href="{{ path("front_app_quiz_index") }}" class="flex gap-x-4 items-center py-2 text-gray-500 dark:text-gray-300 hover:text-indigo-600 group">
                                 <span class="absolute w-1.5 h-8 bg-indigo-600 rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"></span>
                                 <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current"><path d="M9.5 4h-4A1.5 1.5 0 0 0 4 5.5v4A1.5 1.5 0 0 0 5.5 11h4A1.5 1.5 0 0 0 11 9.5v-4A1.5 1.5 0 0 0 9.5 4Z" fill="currentColor"></path><path opacity=".3" fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13h4a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 9.5 20h-4A1.5 1.5 0 0 1 4 18.5v-4A1.5 1.5 0 0 1 5.5 13Zm9-9h4A1.5 1.5 0 0 1 20 5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 13 9.5v-4A1.5 1.5 0 0 1 14.5 4Zm0 9h4a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-4a1.5 1.5 0 0 1 1.5-1.5Z" fill="currentColor"></path></svg>
-                                <span>Overview</span>
+                                <span>Quiz</span>
                             </a>
                         </li>
                     </ul>
