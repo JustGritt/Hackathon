@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<title>Quiz</title>
+
+{% block body %}
+    <h1>Quiz</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ quiz.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ quiz.name }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ quiz.image }}</td>
+            </tr>
+            <tr>
+                <th>Is_active</th>
+                <td>{{ quiz.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Is_draft</th>
+                <td>{{ quiz.isDraft ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Is_published</th>
+                <td>{{ quiz.isPublished ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Is_waiting</th>
+                <td>{{ quiz.isWaiting ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Is_refused</th>
+                <td>{{ quiz.isRefused ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_app_quiz_index') }}">back to list</a>
+
+    <a href="{{ path('front_app_quiz_edit', {'id': quiz.id}) }}">edit</a>
+
+    {{ include('front/quiz/_delete_form.html.twig') }}
+
+{% endblock %}

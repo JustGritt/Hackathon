@@ -1,0 +1,9 @@
+{% extends 'front_base.html.twig' %}
+
+{% block body %}
+    <h1>Create new Quiz</h1>
+
+    {{ include('front/quiz/_form.html.twig') }}
+
+    <a href="{{ path('front_app_quiz_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'back_base.html.twig' %}
+
+
+{% block body %}
+    <h1>Quiz index</h1>
+
+    <div>
+        <a href="#"> <h4>Toutes les créations</h4> </a>
+        <a href="#"> <h4>Statistiques</h4> </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Is_active</th>
+                <th>Is_draft</th>
+                <th>Is_published</th>
+                <th>Is_waiting</th>
+                <th>Is_refused</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.id }}</td>
+                <td>{{ quiz.name }}</td>
+                <td>{{ quiz.image }}</td>
+                <td>{{ quiz.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ quiz.isDraft ? 'Yes' : 'No' }}</td>
+                <td>{{ quiz.isPublished ? 'Yes' : 'No' }}</td>
+                <td>{{ quiz.isWaiting ? 'Yes' : 'No' }}</td>
+                <td>{{ quiz.isRefused ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('front_app_quiz_show', {'id': quiz.id}) }}">show</a>
+                    <a href="{{ path('front_app_quiz_edit', {'id': quiz.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_app_quiz_new') }}">Create new</a>
+{% endblock %}
