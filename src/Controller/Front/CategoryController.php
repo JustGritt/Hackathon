@@ -31,18 +31,10 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // $result = $categoryRepository->findOneBy([
-            //     'name' => $form->get('name')->getData()
-            // ]);
-
-            // if($result !== null) {
-            //     return $this->redirectToRoute('front_app_category');
-            // }
-
             $category->setOwner($this->getUser());
-            $categoryRepository->save($category, true);
+            $category->setIsActive(false);
 
+            $categoryRepository->save($category, true);
             return $this->redirectToRoute('front_app_category');
         }
 

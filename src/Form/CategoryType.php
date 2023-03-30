@@ -13,9 +13,16 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('minAge')
-            ->add('maxAge')
-            ->add('isActive')
+            ->add('minAge', null, [
+                'attr' => [
+                    'min' => 0
+                ]
+            ])
+            ->add('maxAge', null, [
+                'attr' => [
+                    'max' => 100
+                ]
+            ])
         ;
     }
 

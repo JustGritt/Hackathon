@@ -3,21 +3,33 @@
 {% block title %}TEAM!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    {% for item in users %}
-    <div class="category-card">
-        <p>ID: {{item.id}}</p>
-        <p>Name: {{item.email}} </p>
-        <p>Role: {{item.roles[0]}} </p>
-        <div class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-            <a href="{{ path('front_app_team_edit', {'id': item.id}) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+<section class="flex min-h-full users-center justify-center py-12 px-4 sm:px-6 lg:px-4">
+    <div class="w-full max-w-md space-y-8">
+        <div>
+            <h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+                Membres
+            </h2>
+            <a href="{{ path('front_app_team_add') }}" class="text-white hover:text-indigo-900 bg-indigo-600 py-2 px-2 mt-2 flex w-fit">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+                <span class="pr-2">Ajouter un membre</span>
+            </a>
         </div>
+
+        {% for user in users %}
+            <div class="bg-gray-200 py-4 px-8">
+                <p class="text-2xl text-ellipsis break-words">{{user.firstname}} {{user.lastname}}</p>
+                <p>{{user.email}} </p>
+                <p>{{user.roles[0]}} </p>
+                <div class="relative whitespace-nowrap py-4 text-sm font-medium sm:pr-6">
+                    <a href="{{ path('front_app_team_edit', {'id': user.id}) }}" class="text-gray-200 hover:text-gray-400 bg-indigo-600 rounded-full px-4 py-2">Edit</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <p class="text-center">Vous avez déjà un compte ? <a href="{{ path('front_app_login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 text-align">Connectez-vous</a></p>
     </div>
-{% endfor %}
-</div>
+</section>
+
 {% endblock %}
