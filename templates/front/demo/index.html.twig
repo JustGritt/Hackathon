@@ -49,32 +49,33 @@
 					</div>
 				</div>
 			</section>
+
 			<footer class="footer-homepage">
 				<div class="links-container">
 					<div class="footer-link active">
 						<img src="{{ asset('/img/home.svg') }}" alt="Icone page d'accueil">
-						<span>Accueil</span>
+						<a href="{{ path('front_app_logout') }}">Accueil</a>
 					</div>
 
 					<div class="footer-link">
 						<img src="{{ asset('/img/couverture.svg') }}" alt="Icone page de couverture">
-						<span>Couverture</span>
+						<a href="{{ path('front_app_logout') }}">Couverture</a>
 					</div>
 
 					<div class="footer-link">
 						<img src="{{ asset('/img/heart.svg') }}" alt="Icone page de soins">
-						<span>Soins</span>
+						<a href="{{ path('front_app_logout') }}">Soins</a>
 					</div>
 
-					<a href="{{ path('front_app_demo_engagement') }}" class="footer-link">
+					<a href="{{ path('front_app_logout') }}" class="footer-link">
 						<img src="{{ asset('/img/engagement.svg') }}" alt="Icone page d'engagement">
 						<span>Engagement</span>
 					</a>
 
-					<div class="footer-link">
+					<a href="{{ path('front_app_logout') }}" class="footer-link">
 						<img src="{{ asset('/img/profile.svg') }}" alt="Icone page de profil">
 						<span>Profil</span>
-					</div>
+					</a>
 				</div>
 			</footer>
 		</div>
