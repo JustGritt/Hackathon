@@ -37,6 +37,22 @@
             </div>
 
             <div class="-space-y-px rounded-md shadow-sm pt-2">
+                <div class="flex">
+                <label for="bithdate" class="sr-only">Birthdate</label>
+                {{ form_widget(registrationForm.bithdate.month, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 mb-2 sm:text-sm', 'placeholder': 'Mois'}} )}}
+                {{ form_errors(registrationForm.bithdate.month) }}
+
+                <label for="bithdate" class="sr-only">Birthdate</label>
+                {{ form_widget(registrationForm.bithdate.day, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 mb-2 sm:text-sm', 'placeholder': 'Jour'}} )}}
+                {{ form_errors(registrationForm.bithdate.day) }}
+
+                <label for="bithdate" class="sr-only">Birthdate</label>
+                {{ form_widget(registrationForm.bithdate.year, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 mb-2 sm:text-sm'}} )}}
+                {{ form_errors(registrationForm.bithdate.year) }}
+                </div>
+            </div>
+
+            <div class="-space-y-px rounded-md shadow-sm pt-2">
                 <div>
                 <label for="inputPassword" class="sr-only">Password</label>
                 {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Créer un mot de passe'}} )}}
@@ -64,8 +80,6 @@
                 </button>
             </div>
             {{ form_end(registrationForm) }}
-
-            <p class="text-center">Vous avez déjà un compte ? <a href="{{ path('front_app_login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 text-align">Connectez-vous</a></p>
         </div>
     </div>
 {% endblock %}

@@ -31,11 +31,11 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $category->setIsActive(false);
             $category->setOwner($this->getUser());
-            $categoryRepository->save($category, true);
+            $category->setIsActive(false);
 
+            $categoryRepository->save($category, true);
             return $this->redirectToRoute('front_app_category');
         }
 
