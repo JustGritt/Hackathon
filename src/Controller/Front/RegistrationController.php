@@ -28,10 +28,10 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, 
-    UserAuthenticatorInterface $userAuthenticator, 
-    AppCustomAuthenticator $authenticator, 
+    #[Route('/team/add', name: 'app_team_add')]
+    public function register(Request $request,
+    UserAuthenticatorInterface $userAuthenticator,
+    AppCustomAuthenticator $authenticator,
     UserRepository $userRepository): Response
     {
         $user = new User();
@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
 
 
             $this->addFlash('success', 'Your account has been created. Please check your email to confirm your email address.');
-            
+
             return $this->redirectToRoute('front_app_login');
             /*
             return $userAuthenticator->authenticateUser(
@@ -73,6 +73,7 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
+
         $id = $request->get('id'); // retrieve the user id from the url
 
         // Verify the user id exists and is not null
@@ -91,7 +92,7 @@ class RegistrationController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
-            return $this->redirectToRoute('front_app_register');
+            return $this->redirectToRoute('front_app_team_add');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates

@@ -6,17 +6,19 @@ use App\Entity\Traits\TimestampableTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\EventListner\PasswordSubscriber;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email!')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     use TimestampableTrait;
@@ -27,6 +29,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Email (message: "The email '{{ value }}' is not a valid email.")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -41,6 +45,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 6,
+        minMessage: "Your password should be at least {{ limit }} characters",
+        max: 128,
+    )]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -56,7 +66,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         $this->Commentaire_id = new ArrayCollection();
         $this->stats_id = new ArrayCollection();
-    }
+        $this->categories = new ArrayCollection();
+     }
+        
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
+    private Collection $categories;
+
+    #[ORM\OneToOne(mappedBy: 'createdBy', cascade: ['persist', 'remove'])]
+    private ?Quiz $quiz = null;
+
+    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
+    private ?QuizMade $quizMade = null;
+
+    #[ORM\Column(length: 65)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Your firstname should be at least {{ limit }} characters",
+        max: 65,
+    )]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 128)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Your lastname should be at least {{ limit }} characters",
+        max: 128,
+    )]
+    private ?string $lastname = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $bithdate = null;
 
     public function getId(): ?int
     {
@@ -192,6 +233,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         if (!$this->Commentaire_id->contains($videoId)) {
             $this->Commentaire_id->add($videoId);
             $videoId->setUserId($this);
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setOwner($this);
         }
 
         return $this;
@@ -203,6 +258,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             // set the owning side to null (unless already changed)
             if ($videoId->getUserId() === $this) {
                 $videoId->setUserId(null);
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getOwner() === $this) {
+                $category->setOwner(null);
             }
         }
 
@@ -223,7 +285,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             $this->stats_id->add($stats_id);
             $stats_id->addUserId($this);
         }
+     }
 
+    public function getQuiz(): ?Quiz
+    {
+        return $this->quiz;
+    }
+
+    public function setQuiz(Quiz $quiz): self
+    {
+        // set the owning side of the relation if necessary
+        if ($quiz->getCreatedBy() !== $this) {
+            $quiz->setCreatedBy($this);
+        }
+
+        $this->quiz = $quiz;
+    }
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+        return $this;
+    }
+
+    public function getQuizMade(): ?QuizMade
+    {
+        return $this->quizMade;
+    }
+
+    public function setQuizMade(QuizMade $quizMade): self
+    {
+        // set the owning side of the relation if necessary
+        if ($quizMade->getUserId() !== $this) {
+            $quizMade->setUserId($this);
+        }
+
+        $this->quizMade = $quizMade;
+    }
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+        return $this;
+    }
+
+    public function getBithdate(): ?\DateTimeInterface
+    {
+        return $this->bithdate;
+    }
+
+    public function setBithdate(\DateTimeInterface $bithdate): self
+    {
+        $this->bithdate = $bithdate;
         return $this;
     }
 
