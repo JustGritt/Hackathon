@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New HkStat</title>
+
+{% block body %}
+    <h1>Create new HkStat</h1>
+
+    {{ include('hk_stat/_form.html.twig') }}
+
+    <a href="{{ path('front_app_hk_stat_index') }}">back to list</a>
+{% endblock %}
