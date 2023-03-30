@@ -12,7 +12,7 @@ class CategoryEntityType extends AbstractType
     {
         $resolver->setDefaults([
             'class' => Category::class,
-            'choice_label' => function ($category) {
+            'choice_label' => function (Category $category) {
                 return $category->getName();
             },
         ]);

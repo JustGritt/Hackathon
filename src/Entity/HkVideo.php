@@ -40,6 +40,9 @@ class HkVideo
     #[ORM\ManyToMany(targetEntity: HkStat::class, mappedBy: 'video_id')]
     private Collection $hkStats;
 
+    #[ORM\ManyToOne(inversedBy: 'hkVideos')]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->commentaireVideos = new ArrayCollection();
@@ -176,6 +179,18 @@ class HkVideo
         if ($this->hkStats->removeElement($hkStat)) {
             $hkStat->removeVideoId($this);
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
