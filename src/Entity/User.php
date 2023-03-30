@@ -49,9 +49,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: CommentaireVideo::class, orphanRemoval: false)]
     private Collection $Commentaire_id;
 
+    #[ORM\ManyToMany(targetEntity: HkStat::class, mappedBy: 'user_id')]
+    private Collection $stats_id;
+
     public function __construct()
     {
         $this->Commentaire_id = new ArrayCollection();
+        $this->stats_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +204,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             if ($videoId->getUserId() === $this) {
                 $videoId->setUserId(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HkStat>
+     */
+    public function getStatId(): Collection
+    {
+        return $this->stats_id;
+    }
+
+    public function addStatId(HkStat $stats_id): self
+    {
+        if (!$this->stats_id->contains( $stats_id)) {
+            $this->stats_id->add($stats_id);
+            $stats_id->addUserId($this);
         }
 
         return $this;

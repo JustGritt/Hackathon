@@ -37,9 +37,13 @@ class HkVideo
     #[ORM\Column]
     private ?bool $refused = null;
 
+    #[ORM\ManyToMany(targetEntity: HkStat::class, mappedBy: 'video_id')]
+    private Collection $hkStats;
+
     public function __construct()
     {
         $this->commentaireVideos = new ArrayCollection();
+        $this->hkStats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +149,33 @@ class HkVideo
     public function setRefused(bool $refused): self
     {
         $this->refused = $refused;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HkStat>
+     */
+    public function getHkStats(): Collection
+    {
+        return $this->hkStats;
+    }
+
+    public function addHkStat(HkStat $hkStat): self
+    {
+        if (!$this->hkStats->contains($hkStat)) {
+            $this->hkStats->add($hkStat);
+            $hkStat->addVideoId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHkStat(HkStat $hkStat): self
+    {
+        if ($this->hkStats->removeElement($hkStat)) {
+            $hkStat->removeVideoId($this);
+        }
 
         return $this;
     }
