@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         $this->Commentaire_id = new ArrayCollection();
         $this->stats_id = new ArrayCollection();
         $this->categories = new ArrayCollection();
-     }
+    }
         
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
     private Collection $categories;
@@ -233,6 +233,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         if (!$this->Commentaire_id->contains($videoId)) {
             $this->Commentaire_id->add($videoId);
             $videoId->setUserId($this);
+        }
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Category>
@@ -258,6 +262,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             // set the owning side to null (unless already changed)
             if ($videoId->getUserId() === $this) {
                 $videoId->setUserId(null);
+            }
+        }
+        return $this;
+    }
 
     public function removeCategory(Category $category): self
     {
@@ -285,7 +293,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             $this->stats_id->add($stats_id);
             $stats_id->addUserId($this);
         }
-     }
+
+        return $this;
+    }
 
     public function getQuiz(): ?Quiz
     {
