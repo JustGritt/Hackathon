@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Form\CategoryType;
@@ -27,10 +27,11 @@ class CategoryController extends AbstractController
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(CategoryUpdateType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category->setIsActive(false);
             $category->setOwner($this->getUser());
             $category->setIsActive(false);
 
@@ -61,7 +62,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             if($categoryRepository->findBy(['name' => $category->getName()])){
-                // $this->addFlash('error', 'Cette catégorie existe déjà');
+                $this->addFlash('error', 'Cette catégorie existe déjà');
                 return $this->redirectToRoute('front_app_category', [], Response::HTTP_SEE_OTHER);
             }
 
@@ -79,11 +80,12 @@ class CategoryController extends AbstractController
 
     #[Route('/category/enable/{id}', name: 'app_category_enable')]
     #[Security("is_granted('ROLE_ADMIN')")]
-    public function enable(Category $category): Response
+    public function enable(Category $category, Request $request, CategoryRepository $categoryRepository): Response
     {
-        return $this->renderForm('front/category/show.html.twig', [
-            'category' => $category,
+        $category->setIsActive(true);
+        $categoryRepository->save($category, true);
+        $this->addFlash('success', 'Catégorie activée');
 
-        ]);
+        return $this->redirectToRoute('front_app_category', [], Response::HTTP_SEE_OTHER);
     }
 }

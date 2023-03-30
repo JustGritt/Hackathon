@@ -13,11 +13,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\EventListner\PasswordSubscriber;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email!')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     use TimestampableTrait;
@@ -28,6 +29,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Email (message: "The email '{{ value }}' is not a valid email.")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -42,6 +45,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 6,
+        minMessage: "Your password should be at least {{ limit }} characters",
+        max: 128,
+    )]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -57,9 +66,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?QuizMade $quizMade = null;
 
     #[ORM\Column(length: 65)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Your firstname should be at least {{ limit }} characters",
+        max: 65,
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 128)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Your lastname should be at least {{ limit }} characters",
+        max: 128,
+    )]
     private ?string $lastname = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

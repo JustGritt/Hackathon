@@ -17,6 +17,8 @@ class UpdateUserFormType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('firstname')
+            ->add('lastname')
             ->add('roles', ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
