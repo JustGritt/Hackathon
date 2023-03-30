@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/quiz')]
 class QuizController extends AbstractController
@@ -22,16 +23,18 @@ class QuizController extends AbstractController
     }
 
     #[Route('/new', name: 'app_quiz_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, QuizRepository $quizRepository): Response
+    public function new(Request $request, QuizRepository $quizRepository,Security $security): Response
     {
         $quiz = new Quiz();
         $form = $this->createForm(QuizType::class, $quiz);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $security->getUser();
+            $quiz->setCreatedBy($user);
             $quizRepository->save($quiz, true);
 
-            return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_quiz_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/quiz/new.html.twig', [
@@ -57,7 +60,7 @@ class QuizController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $quizRepository->save($quiz, true);
 
-            return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_quiz_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/quiz/edit.html.twig', [
@@ -73,6 +76,6 @@ class QuizController extends AbstractController
             $quizRepository->remove($quiz, true);
         }
 
-        return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('front_app_quiz_index', [], Response::HTTP_SEE_OTHER);
     }
 }

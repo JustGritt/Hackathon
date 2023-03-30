@@ -6,9 +6,12 @@ use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
+#[Vich\Uploadable]
 class Quiz
 {
     #[ORM\Id]
@@ -21,21 +24,14 @@ class Quiz
 
 
     #[ORM\Column(length:255)]
-    private ?string $image;
+    private ?string $image = "";
 
     #[Vich\UploadableField(mapping:"quiz", fileNameProperty:"image")]
-    private \DateTime $imageFile;
+    private File $imageFile;
 
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: QuestionHasQuiz::class)]
     private Collection $questionHasQuizzes;
 
-    #[ORM\OneToOne(inversedBy: 'quiz', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
-
-    #[ORM\OneToOne(inversedBy: 'quiz', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $createdBy = null;
 
     #[ORM\Column]
     private ?bool $is_active = null;
@@ -55,9 +51,21 @@ class Quiz
     #[ORM\OneToOne(mappedBy: 'quiz', cascade: ['persist', 'remove'])]
     private ?CommentsQuiz $commentsQuiz = null;
 
+    #[ORM\ManyToOne(inversedBy: 'quizzes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $createdBy = null;
+
+    #[ORM\ManyToOne(inversedBy: 'quizzes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class)]
+    private Collection $questions;
+
     public function __construct()
     {
         $this->questionHasQuizzes = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,29 +115,6 @@ class Quiz
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
-
-    public function setCreatedBy(User $createdBy): self
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
 
     public function isIsActive(): ?bool
     {
@@ -204,7 +189,7 @@ class Quiz
         }
     }
 
-    public function getImageFile(): \DateTime
+    public function getImageFile(): File
     {
         return $this->imageFile;
     }
@@ -237,6 +222,60 @@ class Quiz
         }
 
         $this->commentsQuiz = $commentsQuiz;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Question>
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions->add($question);
+            $question->setQuiz($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getQuiz() === $this) {
+                $question->setQuiz(null);
+            }
+        }
 
         return $this;
     }

@@ -61,9 +61,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(length: 128)]
     private ?string $lastname = null;
 
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Quiz::class)]
+    private Collection $quizzes;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->quizzes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,6 +270,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quiz>
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes->add($quiz);
+            $quiz->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->removeElement($quiz)) {
+            // set the owning side to null (unless already changed)
+            if ($quiz->getCreatedBy() === $this) {
+                $quiz->setCreatedBy(null);
+            }
+        }
+
         return $this;
     }
 

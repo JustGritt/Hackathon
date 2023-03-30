@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,8 +31,16 @@ class Category
     #[ORM\Column(nullable: true)]
     private ?int $maxAge = null;
 
-    #[ORM\OneToOne(mappedBy: 'category', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'category')]
     private ?Quiz $quiz = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Quiz::class)]
+    private Collection $quizzes;
+
+    public function __construct()
+    {
+        $this->quizzes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,4 +123,35 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Quiz>
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes->add($quiz);
+            $quiz->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->removeElement($quiz)) {
+            // set the owning side to null (unless already changed)
+            if ($quiz->getCategory() === $this) {
+                $quiz->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

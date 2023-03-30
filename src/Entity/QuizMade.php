@@ -17,7 +17,7 @@ class QuizMade
     #[ORM\JoinColumn(nullable: false)]
     private ?Quiz $quiz = null;
 
-    #[ORM\OneToOne(inversedBy: 'quizMade', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'quizMade', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user_id = null;
 
