@@ -41,8 +41,7 @@ class AppFixtures extends Fixture
         $modo->setEmail('modo@modo.fr');
         $modo->setIsVerified(true);
         $modo->setBithdate(new \DateTime('06/04/2014'));
-        $modo->setRoles(['ROLE_ADMIN']);
-
+        $modo->setRoles(['ROLE_MODERATOR']);
         $password = $this->hasher->hashPassword($modo, 'esgi1234');
         $modo->setPassword($password);
 

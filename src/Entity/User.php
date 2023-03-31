@@ -41,16 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     private ?string $plainPassword = null;
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
-    #[Assert\NotBlank]
-    #[Assert\Length(
-        min: 6,
-        minMessage: "Your password should be at least {{ limit }} characters",
-        max: 128,
-    )]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
