@@ -49,9 +49,13 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Quiz::class)]
     private Collection $quizzes;
 
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: HkVideo::class)]
+    private Collection $hkVideos;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
+        $this->hkVideos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +164,36 @@ class Category
             // set the owning side to null (unless already changed)
             if ($quiz->getCategory() === $this) {
                 $quiz->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HkVideo>
+     */
+    public function getHkVideos(): Collection
+    {
+        return $this->hkVideos;
+    }
+
+    public function addHkVideo(HkVideo $hkVideo): self
+    {
+        if (!$this->hkVideos->contains($hkVideo)) {
+            $this->hkVideos->add($hkVideo);
+            $hkVideo->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHkVideo(HkVideo $hkVideo): self
+    {
+        if ($this->hkVideos->removeElement($hkVideo)) {
+            // set the owning side to null (unless already changed)
+            if ($hkVideo->getCategory() === $this) {
+                $hkVideo->setCategory(null);
             }
         }
 
