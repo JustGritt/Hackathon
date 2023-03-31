@@ -30,6 +30,7 @@ final class Version20230121201609 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        //
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE reset_password_request_id_seq CASCADE');

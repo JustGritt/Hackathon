@@ -1,0 +1,92 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Engagement{% endblock %}
+
+
+{% block body %}
+	<main class="engagement flex items-baseline min-h-screen justify-center  px-4 sm:px-6 lg:px-8 bg-[#F8F8FA]">
+
+		<div class="engagement-content w-full max-w-md space-y-8 px-2">
+			<h1 class="text-3xl font-medium text-[#466288]">
+				Engagement
+			</h1>
+
+			<div class="hero-container">
+				<p class="hero-text">
+					Devenez acteur de la communauté Jaji en vous engageant à nos côtés pour améliorer notre système de santé et notre société !
+				</p>
+				<img src="{{ asset('/img/hero-engagement.png') }}" alt="carte de tiers-payant" class="w-full">
+			</div>
+
+			<section class="card-container">
+				<h2>Passez à l’action</h2>
+
+				<div class="card-row">
+					<div class="card-slider">
+						<a href="{{ path('front_app_logout') }}" class="card">
+							<img src="{{ asset('/img/engagement-card.png') }}" alt="Carte devenir bénévole" class="w-full">
+						</a>
+
+						<a href="{{ path('front_app_logout') }}" class="card">
+							<img src="{{ asset('/img/engagement-card-1.png') }}" alt="Carte donner mon sang" class="w-full">
+						</a>
+
+						<a href="{{ path('front_app_logout') }}" class="card">
+							<img src="{{ asset('/img/engagement-card.png') }}" alt="Carte devenir bénévole" class="w-full">
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="card-container">
+				<h2>Connaître ma mutuelle</h2>
+
+				<div class="card-row">
+					<div class="card-slider">
+						<a href="{{ path('front_app_logout') }}" class="card">
+							<img src="{{ asset('/img/engagement-card-3.png') }}" alt="Carte donner mon sang" class="w-full">
+						</a>
+
+
+						<a href="{{ path('front_app_logout') }}" class="card">
+							<img src="{{ asset('/img/engagement-card-3.png') }}" alt="Carte donner mon sang" class="w-full">
+						</a>
+
+						<a href="{{ path('front_app_logout') }}" class="card">
+							<img src="{{ asset('/img/engagement-card-4.png') }}" alt="Carte devenir bénévole" class="w-full">
+						</a>
+					</div>
+				</div>
+				<footer class="footer-homepage">
+					<div class="links-container">
+						<a href="{{ path('front_app_demo_homepage') }}" class="footer-link">
+							<img src="{{ asset('/img/home.svg') }}" alt="Icone page d'engagement">
+							<span>Acceuil</span>
+						</a>
+
+						<div class="footer-link">
+							<img src="{{ asset('/img/couverture.svg') }}" alt="Icone page de couverture">
+							<a href="{{ path('front_app_logout') }}">Couverture</a>
+						</div>
+
+						<div class="footer-link">
+							<img src="{{ asset('/img/heart.svg') }}" alt="Icone page de soins">
+							<a href="{{ path('front_app_logout') }}">Soins</a>
+						</div>
+
+						<a href="{{ path('front_app_logout') }}" class="footer-link active">
+							<img src="{{ asset('/img/engagement.svg') }}" alt="Icone page d'engagement">
+							<span>Engagement</span>
+						</a>
+
+						<a href="{{ path('front_app_logout') }}" class="footer-link">
+							<img src="{{ asset('/img/profile.svg') }}" alt="Icone page de profil">
+							<span>Profil</span>
+						</a>
+					</div>
+				</footer>
+			</section>
+		</div>
+
+	</main>
+{% endblock %}
