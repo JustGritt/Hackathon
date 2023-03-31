@@ -24,8 +24,8 @@ class UpdateUserFormType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
                 'choices'  => [
-                  'Moderator' => 'ROLE_MODERATOR',
-                  'Admin' => 'ROLE_ADMIN',
+                    'Moderator' => 'ROLE_MODERATOR',
+                    'Admin' => 'ROLE_ADMIN',
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, array(

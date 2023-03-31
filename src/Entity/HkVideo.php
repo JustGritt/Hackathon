@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\HkVideoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -39,6 +40,12 @@ class HkVideo
 
     #[ORM\ManyToMany(targetEntity: HkStat::class, mappedBy: 'video_id')]
     private Collection $hkStats;
+
+    #[ORM\Column(length: 128)]
+    private ?string $title = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $categories = [];
 
     public function __construct()
     {
@@ -176,6 +183,30 @@ class HkVideo
         if ($this->hkStats->removeElement($hkStat)) {
             $hkStat->removeVideoId($this);
         }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(array $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }
