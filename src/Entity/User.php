@@ -41,16 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     private ?string $plainPassword = null;
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
-    #[Assert\NotBlank]
-    #[Assert\Length(
-        min: 6,
-        minMessage: "Your password should be at least {{ limit }} characters",
-        max: 128,
-    )]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -232,7 +223,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         if (!$this->Commentaire_id->contains($videoId)) {
             $this->Commentaire_id->add($videoId);
-            $videoId->setUserId($this);
+	    $videoId->setUserId($this);
+	}
+
+	return $this;
+    }
 
     /**
      * @return Collection<int, Category>
@@ -257,7 +252,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         if ($this->Commentaire_id->removeElement($videoId)) {
             // set the owning side to null (unless already changed)
             if ($videoId->getUserId() === $this) {
-                $videoId->setUserId(null);
+		    $videoId->setUserId(null);
+	    }
+	}
+
+	return $this;
+    }
 
     public function removeCategory(Category $category): self
     {
