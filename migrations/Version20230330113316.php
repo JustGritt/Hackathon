@@ -20,10 +20,6 @@ final class Version20230330113316 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE question ADD quiz_id INT NOT NULL');
-        $this->addSql('ALTER TABLE question ADD updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL');
-        $this->addSql('ALTER TABLE question ADD CONSTRAINT FK_B6F7494E853CD175 FOREIGN KEY (quiz_id) REFERENCES quiz (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('CREATE INDEX IDX_B6F7494E853CD175 ON question (quiz_id)');
     }
 
     public function down(Schema $schema): void
