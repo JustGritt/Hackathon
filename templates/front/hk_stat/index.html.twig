@@ -3,7 +3,7 @@
 
 {% block body %}
     <h1>HkStat index</h1>
-
+   <p>Total Clique : {{ hk_stats|length }} </p>
     <table class="table">
         <thead>
             <tr>
@@ -13,6 +13,7 @@
         </thead>
         <tbody>
         {% for hk_stat in hk_stats %}
+         
             <tr>
                 <td>{{ hk_stat.id }}</td>
                 <td>

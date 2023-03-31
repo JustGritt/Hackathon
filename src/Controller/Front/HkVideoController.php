@@ -48,12 +48,14 @@ class HkVideoController extends AbstractController
 
     #[Route('/{id}', name: 'app_hk_video_show', methods: ['GET'])]
     public function show(HkVideo $hkVideo,CommentaireVideoRepository $commentaireVideoRepository,HkStatRepository $hkStatRepository): Response
-    {   
+    {
+   
         /*
         $HkStat = new HkStat();
         $HkStat->addUserId($this->getUser());
         $HkStat->addVideoId($hkVideo);
         */
+
         # on insert les vues, id user et id video
         #dd($HkStat);
 

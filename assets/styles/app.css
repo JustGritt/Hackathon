@@ -1,0 +1,423 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.homepage {
+  padding-bottom: 77px;
+}
+.homepage-content {
+  margin-top: 64px;
+}
+.homepage .hero-container {
+  margin: 16px auto;
+}
+.homepage .hero-container .hero-text {
+  font-size: clamp(17px, 5vw, 24px);
+  font-weight: 700;
+  color: #466288;
+  text-align: center;
+  font-family: Source Sans Pro;
+}
+.homepage .hero-container .hero-text span {
+  display: block;
+  font-size: clamp(14px, 5vw, 16px);
+  font-weight: 400;
+  margin-top: 8px;
+  color: inherit;
+  text-align: inherit;
+  font-family: inherit;
+}
+.homepage .hero-container .hero-text + img {
+  max-width: 238px;
+  margin: 16px auto;
+  width: 100%;
+}
+.homepage .card {
+  box-shadow: 0px 5px 10px rgba(23, 43, 77, 0.07);
+  border-radius: 8px;
+  background: #fff;
+  width: calc(50% - 8px);
+  min-height: 216px;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .homepage .card {
+    max-width: 177px;
+  }
+}
+.homepage .card strong {
+  display: flex;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 21px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin: 9px auto;
+  width: 100%;
+  max-width: 137px;
+}
+.homepage .card p {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  text-align: center;
+  margin: 0 30px;
+  margin-bottom: 18px;
+  max-width: 116px;
+}
+.homepage .card img {
+  max-width: 44px;
+  margin: 0 auto;
+  margin-top: 18px;
+}
+.homepage .card-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.homepage .card-row {
+  display: inline-flex;
+  margin-bottom: 16px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.engagement {
+  overflow-x: hidden;
+  padding-bottom: 77px;
+  padding-right: 0;
+}
+.engagement .engagement-content {
+  margin-bottom: 24px;
+  margin-top: 64px;
+  padding: 0;
+}
+.engagement .hero-container .hero-text {
+  font-family: "Source Sans Pro";
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #6D7D91;
+  padding-right: 2rem;
+}
+.engagement .hero-container img {
+  margin-top: 16px;
+}
+.engagement .card-container {
+  font-family: "Prompt";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  color: #475B7C;
+  margin-top: 20px;
+}
+.engagement .card {
+  width: 238px;
+  height: 166px;
+  display: contents;
+}
+.engagement .card-row {
+  display: flex;
+  width: 100%;
+  overflow: scroll;
+}
+.engagement .card-slider {
+  display: flex;
+  width: 100%;
+  gap: 24px;
+  margin-top: 13px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team.show {
+  height: 100vh;
+  justify-content: flex-start;
+  background: #F8F8FA;
+}
+.team .profile-name {
+  color: #466288;
+  font-family: "Prompt";
+  font-weight: 600;
+  font-size: calmp(36px, 5vw, 48px);
+  line-height: 54px;
+  text-transform: capitalize;
+}
+.team .profile-name svg {
+  display: initial;
+}
+.team .add-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+  background: #355070;
+  width: 100%;
+  border: 1px solid #1F2F42;
+  box-shadow: 0px 2px 4px rgba(23, 43, 77, 0.15);
+  border-radius: 4px;
+  font-size: 20px;
+  line-height: 20px;
+}
+.team .card {
+  border-radius: 15px;
+  filter: drop-shadow(0px 3px 10px rgba(23, 43, 77, 0.07));
+  background: #fff;
+  display: block;
+}
+.team .card p {
+  font-family: "Prompt";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  color: #1F2F42;
+}
+.team .card p:nth-child(2) {
+  text-transform: uppercase;
+}
+.team .card p:nth-last-child(1) {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translate(0%, -50%);
+  background: #75A3E3;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 8px;
+}
+.team .filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.team .filter {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #717171;
+  display: flex;
+  align-items: center;
+}
+.team .filter svg {
+  margin-left: 8px;
+}
+.team .role-dropdown {
+  width: 100%;
+}
+.team .role-dropdown select {
+  width: inherit;
+  background: #D5E4F6;
+  border: 1px solid #ACC8EE;
+  text-align: center;
+  font-size: 16px;
+  line-height: 20px;
+  color: #466288;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  height: 44px;
+  border-radius: 4px;
+}
+.team .info-container {
+  margin-top: 49px;
+}
+.team .info-container h3 {
+  font-family: "Source Sans Pro";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #8696A9;
+}
+.team .info-container .info-panel {
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(23, 43, 77, 0.07);
+  border-radius: 15px;
+  margin: 10px auto;
+  padding: 1rem;
+}
+.team .role-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  height: 44px;
+  background: #D5E4F6;
+  border-radius: 4px;
+}
+.team .cta {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.team .cta-change {
+  padding: 16px 24px;
+  gap: 8px;
+  height: 52px;
+  background: #FFFFFF;
+  border: 1px solid #355070;
+  border-radius: 4px;
+  width: 100%;
+  color: #355070;
+}
+.team .cta-logout {
+  background: #F9ECEC;
+  border: 1px solid #E67377;
+  box-shadow: 0px 2px 4px rgba(23, 43, 77, 0.15);
+  border-radius: 4px;
+  width: 100%;
+  padding: 16px 24px;
+  gap: 8px;
+  color: #E67377;
+}
+
+.video {
+  height: calc(100vh - 114px);
+  background: #F8F8FA;
+  justify-content: center;
+  align-items: baseline;
+}
+.video-header {
+  background: #866C96;
+  height: 114px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.video-header svg {
+  margin-left: 16px;
+  margin-right: 25px;
+}
+.video-header-title {
+  font-family: "Prompt";
+  font-size: 20px;
+  line-height: 30px;
+  color: #FFFFFF;
+  flex-grow: 1;
+}
+.video-form {
+  display: flex;
+  flex-direction: column;
+  height: -webkit-fill-available;
+}
+.video-form-content {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #5D738D;
+  margin-bottom: 24px;
+}
+.video-form-content div {
+  margin-top: 6px;
+}
+.video-form-content textarea {
+  height: 76px;
+}
+
+footer.footer-homepage {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  min-height: 77px;
+  overflow: hidden;
+  background: white;
+  filter: drop-shadow(0px 0px 10px rgba(23, 43, 77, 0.07));
+  border-radius: 20px 20px 0px 0px;
+}
+footer.footer-homepage .links-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+footer.footer-homepage .links-container .footer-link {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  color: #2D3D55;
+  font-size: 14px;
+  position: relative;
+  min-width: 52px;
+  opacity: 0.5;
+}
+footer.footer-homepage .links-container .footer-link.active {
+  opacity: 1;
+}
+footer.footer-homepage .links-container .footer-link.active ::before {
+  content: "";
+  background: #FFD466;
+  width: 56px;
+  height: 8px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100px;
+}
+footer.footer-homepage .links-container .footer-link img {
+  width: 28px;
+  margin: 8px auto;
+}
+
+.cta {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(23, 43, 77, 0.15);
+  border-radius: 4px;
+  padding: 16px 24px;
+  height: 52px;
+  width: 100%;
+  font-family: "Source Sans Pro";
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+.cta-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  flex-direction: column;
+}
+.cta-primary {
+  background: #355070;
+  border: 1px solid #1F2F42;
+}
+.cta-secondary {
+  background: #FFFFFF;
+  border: 1px solid #355070;
+  color: #355070;
+}/*# sourceMappingURL=app.css.map */
