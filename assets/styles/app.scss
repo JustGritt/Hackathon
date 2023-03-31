@@ -392,6 +392,7 @@ footer.footer-homepage {
     bottom: 0;
     left: 0;
     min-height: 77px;
+    overflow: hidden;
     background: white;
     filter: drop-shadow(0px 0px 10px rgba(23, 43, 77, 0.07));
     border-radius: 20px 20px 0px 0px;
@@ -416,12 +417,12 @@ footer.footer-homepage {
                 opacity: 1;
                 ::before {
                     content: "";
-                    background: #8BAFE3;
-                    width: 52px;
-                    height: 4px;
+                    background: #FFD466;
+                    width: 56px;
+                    height: 8px;
                     margin: 0 auto;
                     position: absolute;
-                    top: 0;
+                    top: 0px;
                     left: 50%;
                     transform: translate(-50%, -50%);
                     border-radius: 100px;
