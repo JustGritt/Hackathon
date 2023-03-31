@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class QuizType extends AbstractType
 {
@@ -20,6 +21,9 @@ class QuizType extends AbstractType
     {
         $builder
             ->add('name',TextType::class)
+            ->add('description',TextareaType::class,array(
+                'attr' => array('cols' => '5', 'rows' => '5'),
+            ))
             ->add('imageFile',VichImageType::class)
             ->add('is_active', CheckboxType::class, [
                 'label' => 'Is Active?',
