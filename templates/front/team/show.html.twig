@@ -1,19 +1,75 @@
 {% extends 'front_base.html.twig' %}
-{% block title %}TEAM EDIT!{% endblock %}
+{% block title %}Edition d'un membre{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-   {{form_start(updateEmployeeForm)}}
-   {{form_widget(updateEmployeeForm)}}
-   {{form_rest(updateEmployeeForm)}}
-    <div class="flex gap-5">
-        <button class="mt-6 px-4 py-2 w-64 rounded-md text-center bg-emerald-600 text-white hover:bg-emerald-700">{{ button_label|default('save') | trans }}</button>
-    </div>
-   {{form_end(updateEmployeeForm)}}
-</div>
+<main class="team show flex min-h-full users-center justify-center py-12 px-4 sm:px-6 lg:px-4">
+    <section class="w-full max-w-md space-y-8">
+        <div>
+            <h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+                {{ app.user.firstname }} {{ app.user.lastname }}
+            </h2>
+            <div class="role-dropdown mt-2">
+                {{ form_widget(updateEmployeeForm.roles)}}
+            </div>
+        </div>
+    </section>
+
+    <section class="info-container w-full max-w-md space-y-8">
+        <h3>Mes informations</h3>
+        <div class="info-panel">
+            {{form_start(updateEmployeeForm)}}
+
+            <div class="-space-y-px rounded-md shadow-sm pt-2">
+                <div>
+                {{ form_widget(updateEmployeeForm.email, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Prénom'}} )}}
+                {{ form_errors(updateEmployeeForm.email) }}
+                </div>
+            </div>
+            <div class="-space-y-px rounded-md shadow-sm pt-2">
+                <div>
+                {{ form_widget(updateEmployeeForm.firstname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Prénom'}} )}}
+                {{ form_errors(updateEmployeeForm.firstname) }}
+                </div>
+            </div>
+            <div class="-space-y-px rounded-md shadow-sm pt-2">
+                <div>
+                {{ form_widget(updateEmployeeForm.lastname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Prénom'}} )}}
+                {{ form_errors(updateEmployeeForm.lastname) }}
+                </div>
+            </div>
+            <div class="-space-y-px rounded-md shadow-sm pt-2">
+                <div>
+                <label for="inputPassword" class="sr-only">Password</label>
+                {{ form_widget(updateEmployeeForm.plainPassword.first, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Créer un mot de passe'}} )}}
+                {{ form_errors(updateEmployeeForm.plainPassword.first) }}
+                </div>
+            </div>
+
+            <div class="-space-y-px rounded-md shadow-sm pt-2">
+                <div>
+                <label for="ConfirmPassword" class="sr-only">Password</label>
+                {{ form_widget(updateEmployeeForm.plainPassword.second, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Confirmer mot de passe'}} )}}
+                {{ form_errors(updateEmployeeForm.plainPassword.second) }}
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" class="group relative flex w-full justify-center border border-transparent bg-indigo-600 py-2 px-4 h-12 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 items-center">
+                Valider les modifications
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <!-- Heroicon name: mini/lock-closed -->
+                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                    </svg>
+                </span>
+                </button>
+            </div>
+
+            {{form_rest(updateEmployeeForm)}}
+
+            {{form_end(updateEmployeeForm)}}
+        </div>
+    </section>
+</main>
 {% endblock %}

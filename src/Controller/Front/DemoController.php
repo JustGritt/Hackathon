@@ -11,7 +11,7 @@ class DemoController extends AbstractController
     #[Route('/demo', name: 'app_demo_homepage')]
     public function demo(): Response
     {
-        return $this->render('front/default/index.html.twig', [
+        return $this->render('front/demo/index.html.twig', [
             'controller_name' => 'DemoController',
         ]);
     }

@@ -233,6 +233,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         if (!$this->Commentaire_id->contains($videoId)) {
             $this->Commentaire_id->add($videoId);
             $videoId->setUserId($this);
+        }
+    }
 
     /**
      * @return Collection<int, Category>
@@ -258,6 +260,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             // set the owning side to null (unless already changed)
             if ($videoId->getUserId() === $this) {
                 $videoId->setUserId(null);
+            }
+        }
+    }
 
     public function removeCategory(Category $category): self
     {
