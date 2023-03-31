@@ -7,10 +7,6 @@
 
 log
 
-basicauth /* {
-	ESGI $2a$14$Pxff4dJ2xsRtcQiZVNr5YeDYOv5xHVHsXrMHoCoSyTIWebJTTmptq
-}
-
 route {
     root * /srv/app/public
     mercure {
