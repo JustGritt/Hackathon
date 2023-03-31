@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Answer</title>
+
+{% block body %}
+    <h1>Edit Answer</h1>
+
+    {{ include('front/answer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('front_app_answer_index') }}">back to list</a>
+
+    {{ include('front/answer/_delete_form.html.twig') }}
+{% endblock %}

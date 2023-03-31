@@ -1,0 +1,17 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        quiz:
+            uri_prefix: '%quiz_attachments%'
+            upload_destination: '%kernel.project_dir%/public%quiz_attachments%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: false
+            delete_on_remove: false
+        question:
+            uri_prefix: '%question_attachments%'
+            upload_destination: '%kernel.project_dir%/public%question_attachments%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: false
+            delete_on_remove: false
+
