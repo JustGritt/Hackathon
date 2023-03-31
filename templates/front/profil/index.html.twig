@@ -7,9 +7,12 @@
 <main class="team profile flex min-h-full users-center justify-center py-12 px-4 sm:px-6 lg:px-4">
 	<section class="w-full max-w-md space-y-8">
 		<div>
-			<h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+			<a href="{{ path('front_app_default') }}" class="profile-name mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+				<svg width="16" height="25" viewBox="0 0 16 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M14 2L3 13.8696L14 23" stroke="black" stroke-width="3"/>
+				</svg>
 				{{ app.user.firstname }} {{ app.user.lastname }}
-			</h2>
+			</a>
 			<div class="role-display mt-2">
 				<p>
 					{% if app.user.roles[0] == 'ROLE_ADMIN' %}
@@ -20,7 +23,6 @@
 						Invité
 					{% endif %}
 				</p>
-
 			</div>
 		</div>
 	</section>
@@ -71,56 +73,43 @@
 			</div>
 
 			{{form_rest(updateProfilForm)}}
-
 			{{form_end(updateProfilForm)}}
 		</div>
 
-
-		<a class="mt-8 cta cta-logout">
-		Déconnexion
+		<a href="{{ path('front_app_logout') }}" class="mt-8 cta cta-logout">
+			Déconnexion
 		</a>
+
+		<footer class="footer-homepage">
+			<div class="links-container">
+				<a href="{{ path('front_app_default') }}" class="footer-link">
+					<img src="{{ asset('/img/home.svg') }}" alt="Icone page d'accueil">
+					<span>Accueil</span>
+				</a>
+
+				<div class="footer-link">
+					<img src="{{ asset('/img/couverture.svg') }}" alt="Icone page de couverture">
+					<span>Couverture</span>
+				</div>
+
+				<div class="footer-link">
+					<img src="{{ asset('/img/heart.svg') }}" alt="Icone page de soins">
+					<span>Soins</span>
+				</div>
+
+				<a href="{{ path('front_app_demo_engagement') }}" class="footer-link">
+					<img src="{{ asset('/img/engagement.svg') }}" alt="Icone page d'engagement">
+					<span>Engagement</span>
+				</a>
+
+				<a href="{{ path('front_app_profil') }}" class="footer-link active">
+					<img src="{{ asset('/img/profile.svg') }}" alt="Icone page de profil">
+					<span>Profil</span>
+				</a>
+			</div>
+		</footer>
 	</section>
 
 </main>
-
-
-
-{# <section class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-4">
-	<div class="w-full max-w-md space-y-8">
-		<div>
-			<img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-			<h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
-				Inscription
-			</h2>
-			<p>lorem ipsum dolor</p>
-		</div>
-
-		{{form_start(updateProfilForm)}}
-
-		<div class="-space-y-px rounded-md shadow-sm">
-			<div>
-			{{ form_widget(updateProfilForm.firstname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Nom'}} )}}
-			</div>
-		</div>
-
-		<div class="-space-y-px rounded-md shadow-sm">
-			<div>
-			{{ form_widget(updateProfilForm.lastname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Nom'}} )}}
-			</div>
-		</div>
-
-		<div class="flex gap-5">
-			<button
-				class="mt-6 px-4 py-2 w-64 rounded-md text-center bg-emerald-600 text-white hover:bg-emerald-700">{{ button_label|default('save') | trans }}
-			</button>
-		</div>
-
-		{{form_rest(updateProfilForm)}}
-		{{form_end(updateProfilForm)}}
-
-		<p class="text-center">Vous avez déjà un compte ? <a href="{{ path('front_app_login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 text-align">Connectez-vous</a></p>
-	</div>
-</section> #}
-
 
 {% endblock %}

@@ -6,9 +6,12 @@
 <main class="team show flex min-h-full users-center justify-center py-12 px-4 sm:px-6 lg:px-4">
     <section class="w-full max-w-md space-y-8">
         <div>
-            <h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
-                {{ app.user.firstname }} {{ app.user.lastname }}
-            </h2>
+            <a href="{{ path('front_app_team') }}" class="profile-name mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+				<svg width="16" height="25" viewBox="0 0 16 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M14 2L3 13.8696L14 23" stroke="black" stroke-width="3"/>
+				</svg>
+				{{ app.user.firstname }} {{ app.user.lastname }}
+			</a>
             <div class="role-dropdown mt-2">
                 {{ form_widget(updateEmployeeForm.roles)}}
             </div>
