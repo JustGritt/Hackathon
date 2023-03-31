@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\HkVideoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,6 +48,9 @@ class HkVideo
 
     #[ORM\ManyToMany(targetEntity: HkStat::class, mappedBy: 'video_id')]
     private Collection $hkStats;
+
+    #[ORM\Column(length: 128)]
+    private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'hkVideos')]
     private ?Category $category = null;
@@ -191,6 +195,18 @@ class HkVideo
         return $this;
     }
 
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -199,7 +215,6 @@ class HkVideo
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
         return $this;
     }
     

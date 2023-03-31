@@ -228,7 +228,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             $this->Commentaire_id->add($videoId);
             $videoId->setUserId($this);
         }
-
         return $this;
     }
 
