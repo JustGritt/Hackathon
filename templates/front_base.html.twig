@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+{% set currentUrl = app.request.uri|replace({(app.request.scheme ~ '://' ~ app.request.host): ''})  %}
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +24,7 @@
         {% endblock %}
     </head>
     <body>
+    {{ include('front/partial/_sidebar.html.twig') }}
     {{ include('front/partial/_notyf.html.twig') }}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
