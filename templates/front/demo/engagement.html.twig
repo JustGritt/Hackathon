@@ -23,15 +23,23 @@
 
 				<div class="card-row">
 					<div class="card-slider">
-						<a href="{{ path('front_app_logout') }}" class="card">
+						{% for video in videos %}
+							<a href="{{ path('front_app_demo_video', {'id': video.id})}}" class="card">
+								<img src="{{ asset('/img/engagement-card-1.png') }}" alt="Carte donner mon sang" class="w-full">
+							</a>
+						{% endfor %}
+
+						{% for quiz in quizzes %}
+							<a href="{{ path('front_app_demo_quiz' , {'id': quiz.id})}}" class="card">
+								<img src="{{ asset('/img/engagement-card.png') }}" alt="Carte devenir bénévole" class="w-full">
+							</a>
+
+						{% endfor %}
+		
+						<a href="#" class="card">
 							<img src="{{ asset('/img/engagement-card.png') }}" alt="Carte devenir bénévole" class="w-full">
 						</a>
-
-						<a href="{{ path('front_app_logout') }}" class="card">
-							<img src="{{ asset('/img/engagement-card-1.png') }}" alt="Carte donner mon sang" class="w-full">
-						</a>
-
-						<a href="{{ path('front_app_logout') }}" class="card">
+						<a href="#" class="card">
 							<img src="{{ asset('/img/engagement-card.png') }}" alt="Carte devenir bénévole" class="w-full">
 						</a>
 					</div>
