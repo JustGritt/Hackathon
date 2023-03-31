@@ -16,9 +16,17 @@
             <p>isActive: {{item.isActive == true ? "Activer" : "Non-active" }} </p>
             <a href="{{ path('front_app_category_show', {'id': item.id}) }}" class="text-indigo-600 hover:text-indigo-900">Show the category</a>
             <a href="{{ path('front_app_category_edit', {'id': item.id}) }}" class="text-indigo-600 hover:text-indigo-900">Edit the category</a>
-
-
         </div>
     {% endfor %}
 </div>
-{% endblock %}
+<style lang="postcss">
+    .category-card {
+        background: #f2F2F2;
+    }
+</style>
+{% endblock body %}
+
+
+
+
+

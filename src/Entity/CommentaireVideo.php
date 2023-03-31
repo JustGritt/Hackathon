@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CommentaireVideoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: CommentaireVideoRepository::class)]
 class CommentaireVideo
@@ -14,6 +16,12 @@ class CommentaireVideo
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: 'Votre commentaire doit faire au moins {{ limit }} caractères',
+        max: 65,
+    )]
     private ?string $commentaire = null;
 
     #[ORM\ManyToOne(inversedBy: 'Commentaire_id')]

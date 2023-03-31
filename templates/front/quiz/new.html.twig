@@ -1,0 +1,40 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-blue-dark text-[36px] font-mono text-normal font-semibold">Créer un nouveau quiz</h1>
+
+
+
+<section class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-4">
+    <div class="w-full max-w-md space-y-8">
+
+        {{ form_start(form) }}
+        <div class="input-container-quiz-text">
+            {{ form_label(form.name, null, {}) }}
+            {{ form_widget(form.name, {'attr': {'placeholder': 'Nom ou titre du quiz',}} )}}
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="input-container-quiz-text">
+            {{ form_label(form.description, null, {}) }}
+            {{ form_widget(form.description, {'attr': {'placeholder': 'Titre du quiz', 'rows': '5'}} )}}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div class="mt-8">
+            <button type="submit" class="group relative flex w-full justify-center border border-transparent bg-indigo-600 py-2 px-4 h-12 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 items-center">
+                Valider la catégorie
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <!-- Heroicon name: mini/lock-closed -->
+                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+</section>
+    <a href="{{ path('front_app_quiz_index') }}">back to list</a>
+{% endblock %}

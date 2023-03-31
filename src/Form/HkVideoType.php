@@ -6,6 +6,8 @@ use App\Entity\HkVideo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Form\Type\CategoryEntityType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -18,6 +20,11 @@ class HkVideoType extends AbstractType
             ->add('title')
             ->add('active')
             ->add('description', TextareaType::class)
+            ->add('category', CategoryEntityType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ])
             ->add('waiting')
             ->add('publish')
             ->add('refused')

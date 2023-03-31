@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: HkVideoRepository::class)]
 class HkVideo
@@ -18,12 +19,19 @@ class HkVideo
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $link = null;
 
     #[ORM\Column]
     private ?bool $active = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 4,
+        minMessage: 'Votre description doit faire au moins {{ limit }} caractères',
+        max: 255,
+    )]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'video_id', targetEntity: CommentaireVideo::class, orphanRemoval: true)]
@@ -44,8 +52,8 @@ class HkVideo
     #[ORM\Column(length: 128)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $categories = [];
+    #[ORM\ManyToOne(inversedBy: 'hkVideos')]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -199,15 +207,14 @@ class HkVideo
         return $this;
     }
 
-    public function getCategories(): array
+    public function getCategory(): ?Category
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function setCategories(array $categories): self
+    public function setCategory(?Category $category): self
     {
-        $this->categories = $categories;
-
+        $this->category = $category;
         return $this;
     }
     

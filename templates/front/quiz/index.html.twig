@@ -1,0 +1,57 @@
+{% extends 'back_base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-blue-dark text-[36px] font-mono font-semibold">Quiz</h1>
+
+    <section class="w-full border-b border-b-grey-light-blue">
+        <ul class="flex list-quiz-action">
+            <li ><a href="{{ path('front_app_quiz_index') }}" class=" {{currentUrl == path('front_app_quiz_index')? "active": "" }} ">Toutes les créations </a></li>
+            <li ><a href="{{ path('front_app_quiz_statistics') }}" class=" {{currentUrl == path('front_app_quiz_statistics')? "active": "" }} "> <h4>Statistiques</h4> </a></li>
+        </ul>
+    </section>
+    {% if quizzes is defined  %}
+        <section class="quizz-all">
+            {% for quiz in quizzes %}
+            <article class="card-quizz">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center ">
+                        <svg width="16" height="18" viewBox="0 0 122 183" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.25 61C15.25 35.733 35.733 15.25 61 15.25C86.267 15.25 106.75 35.733 106.75 61C106.75 76.8686 98.671 90.8502 86.4017 99.056C85.9599 99.2836 85.5449 99.5526 85.1611 99.8571C78.1496 104.226 69.8696 106.75 61 106.75C35.733 106.75 15.25 86.267 15.25 61ZM83.7655 117.61C76.7312 120.442 69.0476 122 61 122C52.9529 122 45.2698 120.442 38.2359 117.611L32.5128 160.699L57.0734 145.963C59.4881 144.514 62.5048 144.514 64.9195 145.963L89.4826 160.7L83.7655 117.61ZM23.9356 109.452C9.38378 98.3036 0 80.7477 0 61C0 27.3106 27.3106 0 61 0C94.6894 0 122 27.3106 122 61C122 80.7467 112.617 98.3019 98.0666 109.451L106.68 174.373C107.065 177.275 105.755 180.142 103.307 181.749C100.86 183.356 97.709 183.421 95.1984 181.914L60.9965 161.393L26.7945 181.914C24.2838 183.421 21.1322 183.356 18.685 181.749C16.2379 180.141 14.9273 177.274 15.3128 174.372L23.9356 109.452Z" fill="#336A75"/>
+                        </svg> <span class="card-quizz-title">Quizz : {{ quiz.getName()|slice(0, 10) ~ '...'  }}o</span>
+                    </div>
+                    <span class="tag-draft">brouillon</span>
+                </div>
+                <div class="card-quizz-body">
+                    <img src="{{ vich_uploader_asset(quiz, 'imageFile') }}" alt="quiz" />
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur. Nam interdum massa enim euismod velit rhoncus
+                        </p>
+                    </div>
+                </div>
+            </article>
+                {% if loop.last %}
+                        <a href="{{ path('front_app_quiz_new') }}" class="block !h-[209px] card-quizz-add !w-[420px]">
+                                <i class="fa-regular fa-circle-plus"></i>
+                                <span>Ajouter un quiz</span>
+                        </a>
+                {% endif %}
+            {% else %}
+                <div class="flex flex-col justify-center w-full ">
+                    <h3 class="tag-draft text-center">No quizzes available</h3>
+                    <div class="flex justify-center mt-5 self-start ">
+                        <a href="{{ path('front_app_quiz_new') }}">
+                            <article class="card-quizz-add !h-[180px]">
+                                <i class="fa-regular fa-circle-plus"></i>
+                                <span>Ajouter un quiz</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </section>
+    {% endif %}
+
+{% endblock %}

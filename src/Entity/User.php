@@ -41,16 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     private ?string $plainPassword = null;
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
-    #[Assert\NotBlank]
-    #[Assert\Length(
-        min: 6,
-        minMessage: "Your password should be at least {{ limit }} characters",
-        max: 128,
-    )]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -67,7 +58,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         $this->Commentaire_id = new ArrayCollection();
         $this->stats_id = new ArrayCollection();
         $this->categories = new ArrayCollection();
-     }
+         $this->quizzes = new ArrayCollection();
+    }
         
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
     private Collection $categories;
@@ -96,6 +88,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     )]
     private ?string $lastname = null;
 
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Quiz::class)]
+    private Collection $quizzes;
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $bithdate = null;
 
@@ -234,6 +228,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             $this->Commentaire_id->add($videoId);
             $videoId->setUserId($this);
         }
+        return $this;
     }
 
     /**
@@ -262,6 +257,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
                 $videoId->setUserId(null);
             }
         }
+        return $this;
     }
 
     public function removeCategory(Category $category): self
@@ -290,7 +286,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             $this->stats_id->add($stats_id);
             $stats_id->addUserId($this);
         }
-     }
+
+        return $this;
+    }
 
     public function getQuiz(): ?Quiz
     {
@@ -306,6 +304,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         $this->quiz = $quiz;
     }
+    
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -342,6 +341,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
+    /**
+     * @return Collection<int, Quiz>
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes->add($quiz);
+            $quiz->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->removeElement($quiz)) {
+            // set the owning side to null (unless already changed)
+            if ($quiz->getCreatedBy() === $this) {
+                $quiz->setCreatedBy(null);
+            }
+        }
+    }
     public function getBithdate(): ?\DateTimeInterface
     {
         return $this->bithdate;

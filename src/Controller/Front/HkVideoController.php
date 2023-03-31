@@ -5,12 +5,14 @@ namespace App\Controller\Front;
 use App\Entity\HkVideo;
 use App\Form\HkVideoType;
 use App\Repository\HkVideoRepository;
+use App\Repository\HkStatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\CommentaireVideo;
+use App\Entity\HkStat;
 use App\Form\CommentaireVideoType;
 use App\Repository\CommentaireVideoRepository;
 
@@ -45,8 +47,15 @@ class HkVideoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_hk_video_show', methods: ['GET'])]
-    public function show(HkVideo $hkVideo,CommentaireVideoRepository $commentaireVideoRepository): Response
+    public function show(HkVideo $hkVideo,CommentaireVideoRepository $commentaireVideoRepository,HkStatRepository $hkStatRepository): Response
     {   
+        $HkStat = new HkStat();
+        $HkStat->addUserId($this->getUser());
+        $HkStat->addVideoId($hkVideo);
+
+        # on insert les vues, id user et id video
+        #dd($HkStat);
+
         $comments =  $commentaireVideoRepository->findBy(array('video_id' => $hkVideo ->getId()));
         return $this->render('front/hk_video/show.html.twig', [
             'hk_video' => $hkVideo,
