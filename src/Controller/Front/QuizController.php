@@ -22,6 +22,12 @@ class QuizController extends AbstractController
         ]);
     }
 
+    #[Route('/statistics', name: 'app_quiz_statistics', methods: ['GET'])]
+    public function statistics(QuizRepository $quizRepository): Response
+    {
+        return $this->render('front/quiz/index.html.twig');
+    }
+
     #[Route('/new', name: 'app_quiz_new', methods: ['GET', 'POST'])]
     public function new(Request $request, QuizRepository $quizRepository,Security $security): Response
     {
