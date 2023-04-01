@@ -17,21 +17,22 @@ class VideoFixtures extends Fixture
 
         //create an array of links of random youtube videos
         $links = [
-            'https://youtu.be/JVVeBiewhNg',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
-            'https://youtu.be/1Q8fG0TtVAY',
+           
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
         ];
       
         for($i = 0; $i < 10; $i++)
