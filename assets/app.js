@@ -13,10 +13,3 @@ import './styles/quiz.scss';
 import './bootstrap';
 
 import './controllers/setTheme';
-
-
-
-
-
-
-

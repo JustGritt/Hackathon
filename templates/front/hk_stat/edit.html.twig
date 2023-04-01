@@ -1,0 +1,12 @@
+{% extends 'front_base.html.twig' %}
+{% block title %}Edit HkStat!{% endblock %}
+
+{% block body %}
+    <h1>Edit HkStat</h1>
+
+    {{ include('hk_stat/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('front_app_hk_stat_index') }}">back to list</a>
+
+    {{ include('hk_stat/_delete_form.html.twig') }}
+{% endblock %}

@@ -90,6 +90,31 @@ $tags-text-colors: ("draft": #8696A9, "published": #336A75, "to-validate": #EBA8
   gap: 18px;
   display: flex;
 
+  flex-wrap: wrap;
+  .card-quizz-add{
+    /* min-width: 400px; */
+    width: 352px;
+    /* width: 100%; */
+    height: 85px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #ACC8EE;
+    background-color: #F1F6FC;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    &>.fa-circle-plus{
+      color:#75A3E3;
+      font-size: 30px;
+    }
+    transition: all .2s ease-in-out;
+    &:hover{
+      box-shadow: 3px 0px 22px 5px rgba(23, 43, 77, 0.07);
+    }
+  }
+
   .card-quizz{
     cursor: pointer;
     box-shadow: 3px 0px 22px 5px rgba(23, 43, 77, 0.07);

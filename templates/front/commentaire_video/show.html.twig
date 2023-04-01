@@ -1,0 +1,25 @@
+{% extends 'front_base.html.twig' %}
+{% block title %}Show CommentaireVideo!{% endblock %}
+
+{% block body %}
+    <h1>CommentaireVideo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentaire_video.id }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ commentaire_video.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_app_commentaire_video_index') }}">back to list</a>
+
+    <a href="{{ path('front_app_commentaire_video_edit', {'id': commentaire_video.id}) }}">edit</a>
+
+    {{ include('front/commentaire_video/_delete_form.html.twig') }}
+{% endblock %}

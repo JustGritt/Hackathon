@@ -4,40 +4,84 @@
 
 
 {% block body %}
-    <section class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-4">
-        <div class="w-full max-w-md space-y-8">
-            <div>
-                <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-                <h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
-                    Inscription
-                </h2>
-                <p>lorem ipsum dolor</p>
-            </div>
+<main class="team profile flex min-h-full users-center justify-center py-12 px-4 md:pl-[255px] lg:pl-[255px]">
+	<section class="w-full max-w-md space-y-8">
+		<div>
+			<a href="{{ path('front_app_default') }}" class="profile-name mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+				<svg width="16" height="25" viewBox="0 0 16 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M14 2L3 13.8696L14 23" stroke="black" stroke-width="3"/>
+				</svg>
+				{{ app.user.firstname }} {{ app.user.lastname }}
+			</a>
+			<div class="role-display mt-2">
+				<p>
+					{% if app.user.roles[0] == 'ROLE_ADMIN' %}
+						Administrateur
+					{% elseif app.user.roles[0] == 'ROLE_MODERATOR' %}
+						Moderateur
+					{% else %}
+						Invité
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</section>
 
-            {{form_start(updateProfilForm)}}
+	<section class="info-container w-full max-w-md space-y-8">
+		<h3>Mes informations</h3>
 
-			<div class="-space-y-px rounded-md shadow-sm">
+		<div class="info-panel">
+			{{form_start(updateProfilForm)}}
+
+			<div class="-space-y-px rounded-md shadow-sm pt-2">
 				<div>
-				{{ form_widget(updateProfilForm.firstname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Nom'}} )}}
+				{{ form_widget(updateProfilForm.email, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Prénom'}} )}}
+				{{ form_errors(updateProfilForm.email) }}
+				</div>
+			</div>
+			<div class="-space-y-px rounded-md shadow-sm pt-2">
+				<div>
+				{{ form_widget(updateProfilForm.firstname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Prénom'}} )}}
+				{{ form_errors(updateProfilForm.firstname) }}
+				</div>
+			</div>
+			<div class="-space-y-px rounded-md shadow-sm pt-2">
+				<div>
+				{{ form_widget(updateProfilForm.lastname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Prénom'}} )}}
+				{{ form_errors(updateProfilForm.lastname) }}
+				</div>
+			</div>
+			<div class="-space-y-px rounded-md shadow-sm pt-2">
+				<div>
+				<label for="inputPassword" class="sr-only">Password</label>
+				{{ form_widget(updateProfilForm.plainPassword.first, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Mot de passe'}} )}}
+				{{ form_errors(updateProfilForm.plainPassword.first) }}
 				</div>
 			</div>
 
-			<div class="-space-y-px rounded-md shadow-sm">
+			<div class="-space-y-px rounded-md shadow-sm pt-2">
 				<div>
-				{{ form_widget(updateProfilForm.lastname, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12', 'placeholder': 'Nom'}} )}}
+				<label for="ConfirmPassword" class="sr-only">Password</label>
+				{{ form_widget(updateProfilForm.plainPassword.second, {'attr': {'class': 'relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 sm:text-sm mb-2 h-12 sm:text-sm', 'placeholder': 'Confirmer mot de passe'}} )}}
+				{{ form_errors(updateProfilForm.plainPassword.second) }}
 				</div>
 			</div>
 
-			<div class="flex gap-5">
-				<button
-					class="mt-6 px-4 py-2 w-64 rounded-md text-center bg-emerald-600 text-white hover:bg-emerald-700">{{ button_label|default('save') | trans }}
+			<div class="mt-8">
+				<button type="submit" class="cta cta-change">
+				Modifier mes informations
 				</button>
 			</div>
 
 			{{form_rest(updateProfilForm)}}
 			{{form_end(updateProfilForm)}}
+		</div>
 
-            <p class="text-center">Vous avez déjà un compte ? <a href="{{ path('front_app_login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 text-align">Connectez-vous</a></p>
-        </div>
-    </section>
+		<a href="{{ path('front_app_logout') }}" class="mt-8 cta cta-logout">
+			Déconnexion
+		</a>
+	</section>
+
+</main>
+
 {% endblock %}

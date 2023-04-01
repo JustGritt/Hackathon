@@ -1,0 +1,42 @@
+{% extends 'front_base.html.twig' %}
+{% block title %}HkVideo!{% endblock %}
+
+{% block body %}
+    <main class="md:pl-[255px] lg:pl-[255px]">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Link</th>
+                <th>Active</th>
+                <th>description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hk_video in hk_videos %}
+            <tr>
+                <td>{{ hk_video.id }}</td>
+                <td>{{ hk_video.link }}</td>
+                <td>{{ hk_video.active }}</td>
+                <td>{{ hk_video.description }}</td>
+                <td>
+                    <a href="{{ path('front_app_hk_video_show', {'id': hk_video.id}) }}">show</a>
+                    <a href="{{ path('front_app_hk_video_edit', {'id': hk_video.id}) }}">edit</a>
+                    <a href="{{ path('front_app_hk_video_valider', {'id': hk_video.id}) }}">valider</a>
+                    <a href="{{ path('front_app_hk_video_refused', {'id': hk_video.id}) }}">refuser</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_app_hk_video_new') }}">Create new</a>
+
+    </main>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'front_base.html.twig' %}
+{% block title %}Edit CommentaireVideo!{% endblock %}
+
+{% block body %}
+    <h1>Edit CommentaireVideo</h1>
+
+    {{ include('front/commentaire_video/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('front_app_commentaire_video_index') }}">back to list</a>
+
+    {{ include('front/commentaire_video/_delete_form.html.twig') }}
+{% endblock %}

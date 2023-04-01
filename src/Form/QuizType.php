@@ -24,7 +24,9 @@ class QuizType extends AbstractType
             ->add('description',TextareaType::class,array(
                 'attr' => array('cols' => '5', 'rows' => '5'),
             ))
-            ->add('imageFile',VichImageType::class)
+            ->add('imageFile',VichImageType::class, [
+                'required' => false,
+            ])
             ->add('is_active', CheckboxType::class, [
                 'label' => 'Is Active?',
                 'data' => false, // Set default value to true

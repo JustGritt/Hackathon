@@ -1,0 +1,46 @@
+{% extends 'front_base.html.twig' %}
+{% block title %}HkVideo!{% endblock %}
+
+{% block body %}
+
+ <main class="md:pl-[255px] lg:pl-[255px]">
+    <h1>HkVideo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ hk_video.id }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>
+                    <a href="{{ hk_video.link }}">video</a>
+                </td>
+                <br>
+                
+            </tr>
+
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>  {{ hk_video.description }} </p>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Active</th>
+                <td>{{ hk_video.active }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{dump(comments)}}
+    <a href="{{ path('front_app_hk_video_index') }}">back to list</a>
+
+    <a href="{{ path('front_app_hk_video_edit', {'id': hk_video.id}) }}">edit</a>
+
+    {{ include('front/hk_video/_delete_form.html.twig') }}
+
+</main>
+{% endblock %}

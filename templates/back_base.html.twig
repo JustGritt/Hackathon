@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
@@ -114,6 +116,34 @@
                                 <span class="absolute w-1.5 h-8 bg-indigo-600 rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"></span>
                                 <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current"><path d="M9.5 4h-4A1.5 1.5 0 0 0 4 5.5v4A1.5 1.5 0 0 0 5.5 11h4A1.5 1.5 0 0 0 11 9.5v-4A1.5 1.5 0 0 0 9.5 4Z" fill="currentColor"></path><path opacity=".3" fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13h4a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 9.5 20h-4A1.5 1.5 0 0 1 4 18.5v-4A1.5 1.5 0 0 1 5.5 13Zm9-9h4A1.5 1.5 0 0 1 20 5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 13 9.5v-4A1.5 1.5 0 0 1 14.5 4Zm0 9h4a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-4a1.5 1.5 0 0 1 1.5-1.5Z" fill="currentColor"></path></svg>
                                 <span>Quiz</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path("front_app_category") }}" class="flex gap-x-4 items-center py-2 text-gray-500 dark:text-gray-300 hover:text-indigo-600 group">
+                                <span class="absolute w-1.5 h-8 bg-indigo-600 rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"></span>
+                                <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current"><path d="M9.5 4h-4A1.5 1.5 0 0 0 4 5.5v4A1.5 1.5 0 0 0 5.5 11h4A1.5 1.5 0 0 0 11 9.5v-4A1.5 1.5 0 0 0 9.5 4Z" fill="currentColor"></path><path opacity=".3" fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13h4a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 9.5 20h-4A1.5 1.5 0 0 1 4 18.5v-4A1.5 1.5 0 0 1 5.5 13Zm9-9h4A1.5 1.5 0 0 1 20 5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 13 9.5v-4A1.5 1.5 0 0 1 14.5 4Zm0 9h4a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-4a1.5 1.5 0 0 1 1.5-1.5Z" fill="currentColor"></path></svg>
+                                <span>Categorie</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path("front_app_hk_video_index") }}" class="flex gap-x-4 items-center py-2 text-gray-500 dark:text-gray-300 hover:text-indigo-600 group">
+                                <span class="absolute w-1.5 h-8 bg-indigo-600 rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"></span>
+                                <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current"><path d="M9.5 4h-4A1.5 1.5 0 0 0 4 5.5v4A1.5 1.5 0 0 0 5.5 11h4A1.5 1.5 0 0 0 11 9.5v-4A1.5 1.5 0 0 0 9.5 4Z" fill="currentColor"></path><path opacity=".3" fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13h4a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 9.5 20h-4A1.5 1.5 0 0 1 4 18.5v-4A1.5 1.5 0 0 1 5.5 13Zm9-9h4A1.5 1.5 0 0 1 20 5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 13 9.5v-4A1.5 1.5 0 0 1 14.5 4Zm0 9h4a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-4a1.5 1.5 0 0 1 1.5-1.5Z" fill="currentColor"></path></svg>
+                                <span>Video</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path("front_app_question_index") }}" class="flex gap-x-4 items-center py-2 text-gray-500 dark:text-gray-300 hover:text-indigo-600 group">
+                                <span class="absolute w-1.5 h-8 bg-indigo-600 rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"></span>
+                                <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current"><path d="M9.5 4h-4A1.5 1.5 0 0 0 4 5.5v4A1.5 1.5 0 0 0 5.5 11h4A1.5 1.5 0 0 0 11 9.5v-4A1.5 1.5 0 0 0 9.5 4Z" fill="currentColor"></path><path opacity=".3" fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13h4a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 9.5 20h-4A1.5 1.5 0 0 1 4 18.5v-4A1.5 1.5 0 0 1 5.5 13Zm9-9h4A1.5 1.5 0 0 1 20 5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 13 9.5v-4A1.5 1.5 0 0 1 14.5 4Zm0 9h4a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-4a1.5 1.5 0 0 1 1.5-1.5Z" fill="currentColor"></path></svg>
+                                <span>Question</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path("front_app_profil") }}" class="flex gap-x-4 items-center py-2 text-gray-500 dark:text-gray-300 hover:text-indigo-600 group">
+                                <span class="absolute w-1.5 h-8 bg-indigo-600 rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"></span>
+                                <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current"><path d="M9.5 4h-4A1.5 1.5 0 0 0 4 5.5v4A1.5 1.5 0 0 0 5.5 11h4A1.5 1.5 0 0 0 11 9.5v-4A1.5 1.5 0 0 0 9.5 4Z" fill="currentColor"></path><path opacity=".3" fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13h4a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 9.5 20h-4A1.5 1.5 0 0 1 4 18.5v-4A1.5 1.5 0 0 1 5.5 13Zm9-9h4A1.5 1.5 0 0 1 20 5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 13 9.5v-4A1.5 1.5 0 0 1 14.5 4Zm0 9h4a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-4a1.5 1.5 0 0 1 1.5-1.5Z" fill="currentColor"></path></svg>
+                                <span>Profil</span>
                             </a>
                         </li>
                     </ul>
