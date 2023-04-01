@@ -8,10 +8,6 @@ use App\Entity\Quiz;
 use Faker;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Handler\UploadHandler;
-use Symfony\Component\HttpFoundation\File\File;
-
-use Symfony\Component\VarDumper\VarDumper;
-use Faker\Provider\Base;
 
 
 class QuizFixtures extends Fixture
@@ -69,6 +65,7 @@ class QuizFixtures extends Fixture
             $quiz->setCategory($this->getReference('category_' . $faker->numberBetween(0, 9)));
             $quiz->setCreatedBy($this->getReference('user_0'));
         
+            $this->addReference('quiz_' . $i, $quiz);
             $manager->persist($quiz);
             $manager->flush();
         
