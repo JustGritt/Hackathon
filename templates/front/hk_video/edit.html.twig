@@ -3,6 +3,8 @@
 
 
 {% block body %}
+
+    <main class="md:pl-[255px] lg:pl-[255px]">
     <h1>Edit HkVideo</h1>
 
     {{ include('front/hk_video/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,4 +12,6 @@
     <a href="{{ path('front_app_hk_video_index') }}">back to list</a>
 
     {{ include('front/hk_video/_delete_form.html.twig') }}
+
+    </main>
 {% endblock %}
