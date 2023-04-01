@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
 #[Vich\Uploadable]
-class Quiz
+class Quiz implements \Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,9 +41,6 @@ class Quiz
 
     #[ORM\Column]
     private ?bool $is_active = null;
-
-    #[ORM\Column]
-    private ?bool $is_draft = null;
 
     #[ORM\Column]
     private ?bool $is_published = null;
@@ -137,18 +134,6 @@ class Quiz
         return $this;
     }
 
-    public function isIsDraft(): ?bool
-    {
-        return $this->is_draft;
-    }
-
-    public function setIsDraft(bool $is_draft): self
-    {
-        $this->is_draft = $is_draft;
-
-        return $this;
-    }
-
     public function isIsPublished(): ?bool
     {
         return $this->is_published;
@@ -194,7 +179,7 @@ class Quiz
         // otherwise the event listeners won't be called and the file is lost
         if ($image) {
             // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
@@ -300,4 +285,23 @@ class Quiz
 
         return $this;
     }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->image,
+
+        ));
+    }
+
+    public function unserialize(string $data)
+    {
+        list (
+            $this->id,
+
+            ) = unserialize($data);
+    }
+
+
 }

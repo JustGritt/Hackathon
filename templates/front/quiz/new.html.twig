@@ -1,40 +1,79 @@
 {% extends 'back_base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-blue-dark text-[36px] font-mono text-normal font-semibold">Créer un nouveau quiz</h1>
+    <div class="h-screen relative bg-[#F8F8FA]">
+
+        <header class="header-new-quiz">
+            <a href=""><i class="fa-regular fa-angle-left"></i> Retour</a>
+            <h1 class="text-blue-dark text-[36px] font-mono text-normal font-semibold text-white">Créer un nouveau quiz</h1>
+            <div></div>
+        </header>
+
+        <section class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-4">
+        <div class="w-full max-w-[40rem] space-y-8 section-form relative">
+            <span class="tag-published w-fit absolute right-2">brouillon</span>
+            {{ form_start(form) }}
+            <div class="input-container-quiz-text">
+                {{ form_label(form.name, null, {}) }}
+                {{ form_widget(form.name, {'attr': {'placeholder': 'Nom ou titre du quiz',}} )}}
+                {{ form_errors(form.name) }}
+            </div>
+            <div class="input-container-quiz-text">
+                {{ form_label(form.description, null, {}) }}
+                {{ form_widget(form.description, {'attr': {'placeholder': 'Titre du quiz', 'rows': '5'}} )}}
+                {{ form_errors(form.description) }}
+            </div>
+
+            <div class="input-container-quiz-text">
+                {{ form_label(form.category, null, {}) }}
+                {{ form_widget(form.category, {'attr': {'placeholder': 'Category', 'rows': '5'}} )}}
+                {{ form_errors(form.category) }}
+            </div>
+
+            <div class="input-container-quiz-text">
+                {{ form_label(form.imageFile, null, {}) }}
+                <div class="block !h-[209px] card-quizz-add !w-full relative">
+                    <i class="fa-regular fa-circle-plus" id="icon-add-quiz"></i>
+                    {{ form_widget(form.imageFile, {'attr': { 'class': 'input-image-quiz', 'id': 'image-input-quiz'}} )}}
+                    {{ form_errors(form.imageFile) }}
+                    <span class="text-[#355070]" id="span-filename">Importer une miniature</span>
+                </div>
+            </div>
+
+            <div class="input-container-quiz-text">
+                <h4 class="text-[#5D738D]">Actions</h4>
+                <div class="flex flex-wrap gap-3">
+                    {{ form_widget(form.is_active, {'attr': { 'class': 'quiz', 'id': 'quiz_is_draft', 'data-value': 'Activer'}} )}}
+                    {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
+                    {{ form_widget(form.is_published, {'attr': { 'class': 'quiz', 'id': 'quiz_is_draft', 'data-value': 'Publier'}} )}}
+                    {{ form_widget(form.is_refused, {'attr': { 'class': 'quiz', 'id': 'quiz_is_draft', 'data-value': 'Refuser'}} )}}
+                    {% endif %}
+                </div>
+            </div>
 
 
+            <div class="mt-8">
+                <button type="submit" class="group rounded relative flex w-full justify-center border border-transparent border-btn-cta-blue hover:border-btn-cta-blue bg-btn-cta-blue py-2 px-4 h-12 text-sm font-medium text-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 items-center">
+                    <span class="text-white group-hover:text-btn-cta-blue">Valider le quizz</span>
+                </button>
+            </div>
 
-<section class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-4">
-    <div class="w-full max-w-md space-y-8">
-
-        {{ form_start(form) }}
-        <div class="input-container-quiz-text">
-            {{ form_label(form.name, null, {}) }}
-            {{ form_widget(form.name, {'attr': {'placeholder': 'Nom ou titre du quiz',}} )}}
-            {{ form_errors(form.name) }}
+            {{ form_end(form) }}
         </div>
-        <div class="input-container-quiz-text">
-            {{ form_label(form.description, null, {}) }}
-            {{ form_widget(form.description, {'attr': {'placeholder': 'Titre du quiz', 'rows': '5'}} )}}
-            {{ form_errors(form.description) }}
-        </div>
+    </section>
+        <a href="{{ path('front_app_quiz_index') }}">back to list</a>
 
-        <div class="mt-8">
-            <button type="submit" class="group relative flex w-full justify-center border border-transparent bg-indigo-600 py-2 px-4 h-12 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 items-center">
-                Valider la catégorie
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <!-- Heroicon name: mini/lock-closed -->
-                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                    </svg>
-                </span>
-            </button>
-        </div>
-
-        {{ form_rest(form) }}
-        {{ form_end(form) }}
     </div>
-</section>
-    <a href="{{ path('front_app_quiz_index') }}">back to list</a>
+    <script>
+        const input = document.getElementById('quiz_imageFile_file');
+        input.addEventListener('change',(v)=>{
+            updateFileName(v)
+        })
+        function updateFileName(evt) {
+            const label = document.getElementById('span-filename');
+            const iconAdd = document.getElementById('icon-add-quiz');
+            label.innerHTML = evt.target.files[0].name;
+            iconAdd.remove();
+        }
+    </script>
 {% endblock %}

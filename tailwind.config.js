@@ -28,7 +28,8 @@ module.exports = {
         'bermuda': '#78dcca',
         'very-light-blue': "#F8F8FA",
         'grey-light-blue': "#CDD3DB",
-        'light-blue': "#75A3E3"
+        'light-blue': "#75A3E3",
+        'btn-cta-blue': "#355070"
       },
     },
   },

@@ -32,10 +32,6 @@ class QuizType extends AbstractType
                 'data' => false, // Set default value to true
                 'required' => false
             ])
-            ->add('is_draft', CheckboxType::class,[
-                'data' => false, // Set default value to true
-                'required' => false
-            ])
             ->add('is_published', CheckboxType::class, [
                 'data' => false, // Set default value to true
                 'required' => false
