@@ -35,8 +35,11 @@ class HkVideoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $video = $form->get('link')->getData();
+            $video = str_replace('watch?v=', 'embed/', $video);
+            $video .= '?rel=0&amp;autoplay=1&mute=1';
+            $hkVideo->setLink($video);
             $hkVideoRepository->save($hkVideo, true);
-
             return $this->redirectToRoute('front_app_hk_video_index', [], Response::HTTP_SEE_OTHER);
         }
 
