@@ -45,6 +45,7 @@ class AppFixtures extends Fixture
         $password = $this->hasher->hashPassword($modo, 'esgi1234');
         $modo->setPassword($password);
 
+        $this->addReference('user_0', $user);
         $manager->persist($modo);
         $manager->flush();
 
