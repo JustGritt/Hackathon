@@ -2,14 +2,15 @@
 
 
 {% block body %}
-    <h1 class="text-blue-dark text-[36px] font-mono font-semibold">Quiz</h1>
+    <div class="px-4 sm:px-6 md:px-8">
+        <h1 class="text-blue-dark text-[36px] font-mono font-semibold">Quiz</h1>
 
-    <section class="w-full border-b border-b-grey-light-blue">
-        <ul class="flex list-quiz-action">
-            <li ><a href="{{ path('front_app_quiz_index') }}" class=" {{currentUrl == path('front_app_quiz_index')? "active": "" }} ">Toutes les créations </a></li>
-            <li ><a href="{{ path('front_app_quiz_statistics') }}" class=" {{currentUrl == path('front_app_quiz_statistics')? "active": "" }} "> <h4>Statistiques</h4> </a></li>
-        </ul>
-    </section>
+        <section class="w-full border-b border-b-grey-light-blue">
+            <ul class="flex list-quiz-action">
+                <li ><a href="{{ path('front_app_quiz_index') }}" class=" {{currentUrl == path('front_app_quiz_index')? "active": "" }} ">Toutes les créations </a></li>
+                <li ><a href="{{ path('front_app_quiz_statistics') }}" class=" {{currentUrl == path('front_app_quiz_statistics')? "active": "" }} "> <h4>Statistiques</h4> </a></li>
+            </ul>
+        </section>
     {% if quizzes is defined  %}
         <section class="quizz-all">
             {% for quiz in quizzes %}
@@ -52,6 +53,7 @@
 
             {% endfor %}
         </section>
-    {% endif %}
 
+    {% endif %}
+    </div>
 {% endblock %}

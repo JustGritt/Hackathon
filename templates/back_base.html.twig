@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/44659d9/css/all.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -100,7 +101,7 @@
     <!-- Static sidebar for desktop -->
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col dark:bg-gray-800">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <div class="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5 dark:bg-gray-800">
+        <div class="flex relative flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5 dark:bg-gray-800">
             <div class="flex flex-shrink-0 items-center justify-center px-4">
                 <img class="h-10 w-auto" src="{{ asset("assets/icons/jaji.svg") }}" alt="Jaji">
             </div>
@@ -122,8 +123,8 @@
     </div>
     <div class="flex flex-1 flex-col md:pl-64">
         <main class="flex-1">
-            <div class="py-6">
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <div >
+                <div class="mx-auto max-w-7xl">
                     <!-- Replace with your content -->
                     {% block body %}{% endblock %}
                     <!-- /End replace -->
