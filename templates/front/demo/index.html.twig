@@ -1,10 +1,8 @@
-{% extends 'front_base.html.twig' %}
-
+{% extends '_blank.html.twig' %}
 {% block title %}Hello DefaultController!{% endblock %}
 
-
 {% block body %}
-	<main class="homepage flex items-baseline min-h-screen justify-center  px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#F9D9D5] from-10% via-[#F8F8FA] via-50% to-[#F8F8FA] to-100% ">
+	<main class="homepage flex items-baseline min-h-screen justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#F9D9D5] from-10% via-[#F8F8FA] via-50% to-[#F8F8FA] to-100% ">
 
 		<div class="homepage-content w-full max-w-md space-y-8 px-2">
 			<h1 class="text-3xl font-medium text-[#466288]">
@@ -67,7 +65,7 @@
 						<a href="{{ path('front_app_logout') }}">Soins</a>
 					</div>
 
-					<a href="{{ path('front_app_logout') }}" class="footer-link">
+					<a href="{{ path('front_app_demo_engagement') }}" class="footer-link">
 						<img src="{{ asset('/img/engagement.svg') }}" alt="Icone page d'engagement">
 						<span>Engagement</span>
 					</a>

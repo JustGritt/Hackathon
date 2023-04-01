@@ -4,7 +4,7 @@
 
 
 {% block body %}
-<main class="team profile flex min-h-full users-center justify-center py-12 px-4 sm:px-6 lg:px-4">
+<main class="team profile flex min-h-full users-center justify-center py-12 px-4 md:pl-[255px] lg:pl-[255px]">
 	<section class="w-full max-w-md space-y-8">
 		<div>
 			<a href="{{ path('front_app_default') }}" class="profile-name mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
@@ -29,6 +29,7 @@
 
 	<section class="info-container w-full max-w-md space-y-8">
 		<h3>Mes informations</h3>
+
 		<div class="info-panel">
 			{{form_start(updateProfilForm)}}
 
@@ -79,35 +80,6 @@
 		<a href="{{ path('front_app_logout') }}" class="mt-8 cta cta-logout">
 			Déconnexion
 		</a>
-
-		<footer class="footer-homepage">
-			<div class="links-container">
-				<a href="{{ path('front_app_default') }}" class="footer-link">
-					<img src="{{ asset('/img/home.svg') }}" alt="Icone page d'accueil">
-					<span>Accueil</span>
-				</a>
-
-				<div class="footer-link">
-					<img src="{{ asset('/img/couverture.svg') }}" alt="Icone page de couverture">
-					<span>Couverture</span>
-				</div>
-
-				<div class="footer-link">
-					<img src="{{ asset('/img/heart.svg') }}" alt="Icone page de soins">
-					<span>Soins</span>
-				</div>
-
-				<a href="{{ path('front_app_demo_engagement') }}" class="footer-link">
-					<img src="{{ asset('/img/engagement.svg') }}" alt="Icone page d'engagement">
-					<span>Engagement</span>
-				</a>
-
-				<a href="{{ path('front_app_profil') }}" class="footer-link active">
-					<img src="{{ asset('/img/profile.svg') }}" alt="Icone page de profil">
-					<span>Profil</span>
-				</a>
-			</div>
-		</footer>
 	</section>
 
 </main>

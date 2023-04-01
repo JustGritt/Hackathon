@@ -1,13 +1,20 @@
 {% extends 'front_base.html.twig' %}
-{% block title %}TEAM!{% endblock %}
+{% block title %}Catégories{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<main class="categories md:pl-[255px] lg:pl-[255px] flex min-h-full users-center justify-center py-12 px-4 flex-col">
+    <div>
+        <h2 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 text-left">
+            Catégories
+        </h2>
+        <a href="{{ path('front_app_category_new') }}" class="cta cta-add bg-[#355070] mt-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            <span class="pr-2">Ajouter une catégorie</span>
+        </a>
+    </div>
 
-<div class="example-wrapper">
     {% for item in categories %}
         <div class="category-card">
             <p>Name: {{item.name}} </p>
@@ -18,14 +25,8 @@
             <a href="{{ path('front_app_category_edit', {'id': item.id}) }}" class="text-indigo-600 hover:text-indigo-900">Edit the category</a>
         </div>
     {% endfor %}
-</div>
-<style lang="postcss">
-    .category-card {
-        background: #f2F2F2;
-    }
-</style>
-{% endblock body %}
-
+</main>
+{% endblock %}
 
 
 
