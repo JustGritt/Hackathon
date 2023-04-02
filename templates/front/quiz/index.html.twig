@@ -24,8 +24,6 @@
 
                     {% if quiz.isActive() %}
                         <span class="tag-active">Actif</span>
-                    {% elseif quiz.isDraft() %}
-                        <span class="tag-draft">Brouillon</span>
                     {% elseif quiz.isPublished() %}
                         <span class="tag-published">Publié</span>
                     {% elseif quiz.isWaiting() %}

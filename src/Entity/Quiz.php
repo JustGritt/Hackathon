@@ -29,11 +29,11 @@ class Quiz implements \Serializable
     private ?string $name = null;
 
 
-    #[ORM\Column(length:255)]
+    #[ORM\Column(length:255, nullable: true)]
     private ?string $image = "";
 
     #[Vich\UploadableField(mapping:"quiz", fileNameProperty:"image")]
-    private File $imageFile;
+    private ?File $imageFile = null;
 
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: QuestionHasQuiz::class)]
     private Collection $questionHasQuizzes;
@@ -183,9 +183,15 @@ class Quiz implements \Serializable
         }
     }
 
+    /*
     public function getImageFile(): File
     {
         return $this->imageFile;
+    }*/
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile ? new File($this->imageFile) : null;
     }
 
     public function setImage($image): void
@@ -299,6 +305,7 @@ class Quiz implements \Serializable
     {
         list (
             $this->id,
+            $this->image,
 
             ) = unserialize($data);
     }
